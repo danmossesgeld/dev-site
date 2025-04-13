@@ -1,4 +1,4 @@
-import type { Project, Experience, Education, TechStackCategory, Screenshots } from './types';
+import type { Project, Experience, TechStackCategory, Screenshots } from './types';
 
 export const contactInfo = {
 	email: 'danmossesgeld@gmail.com'
@@ -29,43 +29,15 @@ export const experiences: Experience[] = [
 	}
 ];
 
-export const education: Education[] = [
-	{
-		degree: 'Bachelor of Science in Information Technology',
-		period: '2017 - 2021',
-		school: 'Polytechnic University of the Philippines'
-	}
-];
-
 export const projects: Project[] = [
-	{
-		title: "Computerized Accounting System",
-		description: "Enterprise-grade accounting solution with comprehensive financial management, reporting, and multi-user support. Features include automated journal entries, financial statements, and audit trails.",
-		tech: ["C#", ".NET", "MSSQL", "Crystal Reports"],
-		status: "Live",
-		date: "2022 - 2023",
-		sourceUrl: "#",
-		liveUrl: "#",
-		features: []
-	},
-	{
-		title: "Production Monitoring System",
-		description: "Real-time production tracking system with live analytics, KPI dashboards, and automated reporting. Enables efficient monitoring of manufacturing processes and productivity metrics.",
-		tech: ["C#", ".NET", "MSSQL", "JavaScript"],
-		status: "Live",
-		date: "2021 - 2022",
-		sourceUrl: "#",
-		liveUrl: "#",
-		features: []
-	},
 	{
 		title: "E-Commerce Platform",
 		description: "Modern online store platform with real-time inventory management, secure payment processing, and responsive design. Features include user authentication, order tracking, and admin dashboard.",
 		tech: ["SvelteKit", "TypeScript", "Firebase Hosting", "Firestore Cloud", "DaisyUI", "TailwindCSS"],
-		status: "Development",
+		status: "Live",
 		date: "2023 - Present",
-		sourceUrl: "#",
-		liveUrl: "#",
+		sourceUrl: "https://github.com/danmossesgeld/online-shop",
+		liveUrl: "https://doki-shop.web.app/",
 		features: [
 			{
 				name: "Reactive Homepage",
@@ -134,6 +106,26 @@ export const projects: Project[] = [
 				imageIndex: 10
 			}
 		]
+	},
+	{
+		title: "Computerized Accounting System",
+		description: "Enterprise-grade accounting solution with comprehensive financial management, reporting, and multi-user support. Features include automated journal entries, financial statements, and audit trails.",
+		tech: ["C#", ".NET", "MSSQL", "Crystal Reports"],
+		status: "Live",
+		date: "2022 - 2023",
+		sourceUrl: "#",
+		liveUrl: "#",
+		features: []
+	},
+	{
+		title: "Production Monitoring System",
+		description: "Real-time production tracking system with live analytics, KPI dashboards, and automated reporting. Enables efficient monitoring of manufacturing processes and productivity metrics.",
+		tech: ["C#", ".NET", "MSSQL", "JavaScript"],
+		status: "Live",
+		date: "2021 - 2022",
+		sourceUrl: "#",
+		liveUrl: "#",
+		features: []
 	},
 	{
 		title: "Web-Based POS System",

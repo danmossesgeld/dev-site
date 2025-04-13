@@ -6,36 +6,79 @@
     contactInfo, 
     professionalSummary, 
     experiences, 
-    education, 
     projects, 
     techStack, 
     screenshots 
   } from '$lib/data';
   import Navbar from '$lib/components/Navbar.svelte';
+  import ProjectCard from '$lib/components/ProjectCard.svelte';
 
+  // Helper function for tech icons
+  function getTechIcon(tech: string): string {
+    const techLower = tech.toLowerCase();
+    if (techLower.includes('svelte')) return 'logos:svelte-icon';
+    if (techLower.includes('typescript')) return 'logos:typescript-icon';
+    if (techLower.includes('firestore') || techLower.includes('firebase')) return 'logos:firebase';
+    if (techLower.includes('tailwind')) return 'logos:tailwindcss-icon';
+    if (techLower.includes('daisyui')) return 'logos:daisyui';
+    if (techLower.includes('.net')) return 'logos:dotnet';
+    if (techLower.includes('c#')) return 'logos:c-sharp';
+    if (techLower.includes('mssql')) return 'material-symbols:database';
+    if (techLower.includes('crystal')) return 'material-symbols:analytics-rounded';
+    if (techLower.includes('javascript')) return 'logos:javascript';
+    if (techLower.includes('quickbooks')) return 'material-symbols:book';
+    if (techLower.includes('rest')) return 'logos:swagger';
+    return 'material-symbols:code';
+  }
+
+  // State management
   let activeSection = 'about';
   let typedText = '';
   const fullText = 'Fullstack Web & Desktop Developer';
   let cursorVisible = true;
-
   let selectedProject: Project | null = null;
   let showModal = false;
   let selectedImageIndex: number | null = null;
+  let projectsContainer: HTMLElement;
+  let activeProjectIndex = 0;
 
-  function openModal(project: Project) {
+  // Modal handlers
+  function openModal(project: Project): void {
     selectedProject = project;
     showModal = true;
     selectedImageIndex = 0;
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal() {
+  function closeModal(): void {
     showModal = false;
     selectedProject = null;
     selectedImageIndex = null;
     document.body.style.overflow = 'auto';
   }
 
+  // Feature selection handler
+  function selectFeature(index: number, event: MouseEvent): void {
+    event.stopPropagation(); // Prevent modal from closing
+    selectedImageIndex = index;
+  }
+
+  // Handle keyboard events for modal
+  function handleKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && showModal) {
+      closeModal();
+    }
+  }
+
+  function handleScroll() {
+    if (projectsContainer) {
+      const scrollLeft = projectsContainer.scrollLeft;
+      const containerWidth = projectsContainer.clientWidth;
+      activeProjectIndex = Math.round(scrollLeft / containerWidth);
+    }
+  }
+
+  // Intersection Observer setup
   onMount(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -65,9 +108,13 @@
       cursorVisible = !cursorVisible;
     }, 500);
 
+    // Add keyboard event listener
+    document.addEventListener('keydown', handleKeydown);
+
     return () => {
       observer.disconnect();
       clearInterval(typeInterval);
+      document.removeEventListener('keydown', handleKeydown);
     };
   });
 </script>
@@ -76,39 +123,51 @@
 
 <main class="pt-16 bg-black text-white">
   <!-- Hero Section -->
-  <section id="about" class="min-h-[80vh] relative flex items-center">
+  <section id="about" class="min-h-screen relative flex items-center overflow-hidden">
+    <!-- Background elements -->
     <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
-    <div class="container mx-auto px-4 py-12 relative">
-      <div class="max-w-4xl mx-auto">
-        <div class="flex flex-col md:flex-row items-center gap-8">
-          <div class="flex-1 text-center md:text-left" in:fade={{ duration: 1000, delay: 200 }}>
-            <div class="mb-6">
-              <h1 class="text-4xl md:text-5xl font-bold mb-3">
+    <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
+    <div class="absolute top-1/2 -translate-y-1/2 right-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 -translate-y-1/2 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
+    
+    <div class="container mx-auto px-4 py-20 relative">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="flex-1 text-center lg:text-left" in:fade={{ duration: 1000, delay: 200 }}>
+            <div class="mb-8">
+              <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
                 <span class="text-primary">Dan Oscar</span><br/>
                 C. Mossesgeld
               </h1>
-              <p class="text-xl text-white/70 mb-2">{typedText}{#if cursorVisible}<span class="text-primary">|</span>{/if}</p>
+              <p class="text-2xl md:text-3xl text-white/70 mb-6">
+                {typedText}{#if cursorVisible}<span class="text-primary">|</span>{/if}
+              </p>
             </div>
-            <p class="text-base mb-6 text-white/70 bg-white/5 p-4 rounded-lg border border-white/10">
-              Innovative Full Stack Developer specializing in modern web applications with SvelteKit, TypeScript, and Firebase. 
-              Experienced in building scalable enterprise solutions, from real-time monitoring systems to cloud-based POS applications. 
-              Passionate about creating efficient, user-centric applications with clean, maintainable code.
+            <p class="text-lg mb-8 text-white/70 bg-white/5 p-6 rounded-xl border border-white/10 max-w-2xl mx-auto lg:mx-0">
+              {professionalSummary}
             </p>
-            <div class="flex gap-4 justify-center md:justify-start">
-              <a href="mailto:{contactInfo.email}" class="btn btn-sm btn-primary">
-                Contact Me
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="mailto:{contactInfo.email}" class="btn btn-primary btn-lg group">
+                <span class="flex items-center gap-2">
+                  <iconify-icon icon="material-symbols:mail-rounded" width="24"></iconify-icon>
+                  Contact Me
+                </span>
               </a>
-              <a href="#projects" class="btn btn-sm btn-outline text-white hover:text-black">
-                View Projects
+              <a href="#projects" class="btn btn-outline btn-lg text-white hover:text-black group">
+                <span class="flex items-center gap-2">
+                  <iconify-icon icon="material-symbols:code-rounded" width="24"></iconify-icon>
+                  View Projects
+                </span>
               </a>
             </div>
           </div>
-          <div class="w-40 md:w-56" in:fade={{ duration: 1000 }}>
-            <div class="aspect-square rounded-lg bg-white/5 p-3 border border-white/10">
+          <div class="w-48 md:w-64 lg:w-80" in:fade={{ duration: 1000 }}>
+            <div class="aspect-square rounded-2xl bg-white/5 p-4 border border-white/10 relative group">
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img 
                 src="/icons/profilepic.png" 
-                alt="Profile" 
-                class="rounded-lg object-cover w-full h-full"
+                alt="Profile picture of Dan Oscar C. Mossesgeld" 
+                class="rounded-xl object-cover w-full h-full relative z-10"
               />
             </div>
           </div>
@@ -118,131 +177,97 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-20 bg-white/5">
-    <div class="container mx-auto px-4">
+  <section id="projects" class="py-32 bg-white/5 relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <div class="absolute top-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
+    
+    <div class="container mx-auto px-4 relative">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">
-          Featured <span class="text-primary">Projects</span>
-        </h2>
-        <div class="space-y-16">
-          {#each projects as project, i}
-            <div 
-              class="group"
-              in:fly={{ y: 50, duration: 500, delay: i * 200 }}
-            >
-              <div class="bg-black rounded-xl border border-white/10 overflow-hidden hover:border-primary/30 transition-colors duration-300">
-                <div class="p-6">
-                  <div class="flex flex-col lg:flex-row gap-8">
-                    <div class="lg:w-1/3">
-                      <div class="flex items-center gap-2 mb-2">
-                        <h3 class="text-2xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent">{project.title}</h3>
-                        {#if project.status}
-                          <span class="px-2 py-0.5 text-xs font-medium rounded-full {
-                            project.status === 'Live' ? 'bg-green-500/20 text-green-400' :
-                            project.status === 'Development' ? 'bg-yellow-500/20 text-yellow-400' :
-                            'bg-blue-500/20 text-blue-400'
-                          }">{project.status}</span>
-                        {/if}
-                      </div>
-                      <p class="text-white/70 mb-2 text-sm leading-relaxed">{project.description}</p>
-                      {#if project.date}
-                        <p class="text-xs text-white/50 mb-3 flex items-center gap-1">
-                          <iconify-icon icon="material-symbols:calendar-month-outline-rounded" width="14"></iconify-icon>
-                          {project.date}
-                        </p>
-                      {/if}
-                      <div class="flex gap-2 mb-4">
-                        {#if project.liveUrl}
-                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" 
-                             class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300">
-                            <iconify-icon icon="material-symbols:link-rounded" width="16"></iconify-icon>
-                            Live Demo
-                          </a>
-                        {/if}
-                        {#if project.sourceUrl}
-                          <a href={project.sourceUrl} target="_blank" rel="noopener noreferrer"
-                             class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-all duration-300">
-                            <iconify-icon icon="material-symbols:code-rounded" width="16"></iconify-icon>
-                            Source Code
-                          </a>
-                        {/if}
-                      </div>
-                      <div class="bg-white/5 rounded-lg p-3 mb-4">
-                        <div class="flex items-center gap-2 mb-2">
-                          <iconify-icon icon="material-symbols:stack" class="text-primary" width="18"></iconify-icon>
-                          <h4 class="text-sm font-medium text-primary">Tech Stack</h4>
-                        </div>
-                        <div class="grid grid-cols-3 gap-2">
-                          {#each project.tech as tech}
-                            <div class="px-2 py-2 rounded-lg bg-black/50 backdrop-blur flex flex-col items-center gap-1.5 group hover:bg-primary/20 transition-all duration-300">
-                              <div class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-all duration-300">
-                                <iconify-icon icon={
-                                  tech.toLowerCase().includes('svelte') ? 'logos:svelte-icon' :
-                                  tech.toLowerCase().includes('typescript') ? 'logos:typescript-icon' :
-                                  tech.toLowerCase().includes('firestore') ? 'logos:firebase' :
-                                  tech.toLowerCase().includes('firebase') ? 'logos:firebase' :
-                                  tech.toLowerCase().includes('tailwind') ? 'logos:tailwindcss-icon' :
-                                  tech.toLowerCase().includes('daisyui') ? 'logos:daisyui' :
-                                  tech.toLowerCase().includes('.net') ? 'logos:dotnet' :
-                                  tech.toLowerCase().includes('c#') ? 'logos:c-sharp' :
-                                  tech.toLowerCase().includes('mssql') ? 'material-symbols:database' :
-                                  tech.toLowerCase().includes('crystal') ? 'material-symbols:analytics-rounded' :
-                                  tech.toLowerCase().includes('javascript') ? 'logos:javascript' :
-                                  tech.toLowerCase().includes('quickbooks') ? 'material-symbols:book' :
-                                  tech.toLowerCase().includes('rest') ? 'logos:swagger' :
-                                  'material-symbols:code'
-                                } width="24" height="24"></iconify-icon>
-                              </div>
-                              <span class="text-[11px] font-medium text-white/70 group-hover:text-primary transition-colors duration-300 text-center leading-tight">{tech}</span>
-                            </div>
-                          {/each}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lg:w-2/3">
-                      <div class="flex flex-col gap-4">
-                        <!-- Main Image Display -->
-                        <!-- svelte-ignore a11y_click_events_have_key_events -->
-                        <!-- svelte-ignore a11y_no_static_element_interactions -->
-                        <div class="relative aspect-[16/9] rounded-xl overflow-hidden bg-black cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all duration-300 shadow-lg"
-                             on:click={() => openModal(project)}>
-                          {#if screenshots[project.title]?.length > 0}
-                            <img 
-                              src={screenshots[project.title][selectedImageIndex !== null ? selectedImageIndex : 0].url} 
-                              alt={screenshots[project.title][selectedImageIndex !== null ? selectedImageIndex : 0].caption}
-                              class="w-full h-full object-contain"
-                            />
-                          {:else}
-                            <div class="w-full h-full flex items-center justify-center text-white/30">
-                              <iconify-icon icon="material-symbols:image" width="48"></iconify-icon>
-                            </div>
-                          {/if}
-                        </div>
-
-                        <!-- Feature Buttons -->
-                        {#if project.features.length > 0}
-                          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                            {#each project.features as feature}
-                              <button 
-                                class="group bg-black/50 backdrop-blur rounded-lg p-3 hover:bg-primary/10 transition-all duration-300 flex flex-col items-center text-center {selectedImageIndex === feature.imageIndex ? 'ring-2 ring-primary bg-primary/10' : 'hover:scale-[1.02]'}"
-                                on:click={() => selectedImageIndex = feature.imageIndex}
-                              >
-                                <div class="w-8 h-8 flex items-center justify-center text-primary mb-2 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                                  <iconify-icon icon={feature.icon} width="20"></iconify-icon>
-                                </div>
-                                <span class="text-sm font-medium text-white group-hover:text-primary transition-colors duration-300">{feature.name}</span>
-                                <p class="text-[10px] text-white/50 mt-1 line-clamp-2 group-hover:text-white/70 transition-colors duration-300">{feature.description}</p>
-                              </button>
-                            {/each}
-                          </div>
-                        {/if}
-                      </div>
-                    </div>
-                  </div>
+        <div class="text-center mb-20">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">
+            Featured <span class="text-primary">Projects</span>
+          </h2>
+          <p class="text-xl text-white/70 max-w-2xl mx-auto">
+            A showcase of my most recent and impactful work, demonstrating my expertise in full-stack development and modern web technologies.
+          </p>
+        </div>
+        
+        <div class="relative">
+          <!-- Breadcrumb Navigation -->
+          <div class="absolute -top-16 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10">
+            {#each projects as project, i}
+              <button 
+                class="flex items-center gap-2 group relative"
+                on:click={() => {
+                  const container = document.querySelector('.projects-container');
+                  if (container) {
+                    container.scrollTo({
+                      left: i * container.clientWidth,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                aria-label={`Go to ${project.title}`}
+              >
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-3 h-3 rounded-full bg-white/20 group-hover:bg-primary transition-all duration-300 {activeProjectIndex === i ? 'bg-primary scale-150 ring-4 ring-primary/20' : ''}"></div>
+                  <span class="text-sm text-white/50 group-hover:text-white transition-colors duration-300 {activeProjectIndex === i ? 'text-white font-medium' : ''} whitespace-nowrap">
+                    {project.title}
+                  </span>
                 </div>
+                {#if i < projects.length - 1}
+                  <div class="w-8 h-px bg-white/20 group-hover:bg-primary/50 transition-colors duration-300"></div>
+                {/if}
+              </button>
+            {/each}
+          </div>
+
+          <!-- Scroll buttons -->
+          <button 
+            class="absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-primary/20 transition-all duration-300 z-10 backdrop-blur-sm -translate-x-8"
+            on:click={() => {
+              const container = document.querySelector('.projects-container');
+              if (container) {
+                container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+              }
+            }}
+            aria-label="Scroll projects left"
+          >
+            <iconify-icon icon="material-symbols:chevron-left" width="32"></iconify-icon>
+          </button>
+          
+          <button 
+            class="absolute right-0 top-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-primary/20 transition-all duration-300 z-10 backdrop-blur-sm translate-x-8"
+            on:click={() => {
+              const container = document.querySelector('.projects-container');
+              if (container) {
+                container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+              }
+            }}
+            aria-label="Scroll projects right"
+          >
+            <iconify-icon icon="material-symbols:chevron-right" width="32"></iconify-icon>
+          </button>
+
+          <!-- Projects container -->
+          <div 
+            class="projects-container flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-16"
+            bind:this={projectsContainer}
+            on:scroll={handleScroll}
+          >
+            {#each projects as project, i}
+              <div class="flex-none w-[75vw] md:w-[55vw] lg:w-[45vw] snap-center px-8 {activeProjectIndex === i ? 'scale-100' : 'scale-95 opacity-70'} transition-all duration-500">
+                <ProjectCard 
+                  {project}
+                  {selectedImageIndex}
+                  onFeatureSelect={selectFeature}
+                  onModalOpen={openModal}
+                />
               </div>
-            </div>
-          {/each}
+            {/each}
+          </div>
         </div>
       </div>
     </div>
@@ -250,26 +275,27 @@
 
   <!-- Screenshot Modal -->
   {#if showModal}
-    <!-- svelte-ignore a11y_click_events_have_key_events -->
-    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div 
       class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
       on:click={closeModal}
       transition:fade={{ duration: 200 }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Project Screenshot Modal"
     >
       <div class="relative w-full max-w-6xl h-[80vh]">
-        <!-- svelte-ignore a11y_consider_explicit_label -->
         <button 
           class="absolute -top-12 right-0 text-white/70 hover:text-white"
           on:click={closeModal}
+          aria-label="Close modal"
         >
           <iconify-icon icon="material-symbols:close" width="24"></iconify-icon>
         </button>
         {#if selectedProject && screenshots[selectedProject.title]?.length > 0}
           <div class="relative h-full rounded-lg overflow-hidden bg-black">
             <img 
-              src={screenshots[selectedProject.title][selectedImageIndex ?? 0].url} 
-              alt={screenshots[selectedProject.title][selectedImageIndex ?? 0].caption}
+              src={screenshots[selectedProject.title][selectedImageIndex ?? 0]?.url ?? ''} 
+              alt={screenshots[selectedProject.title][selectedImageIndex ?? 0]?.caption ?? `Screenshot of ${selectedProject.title}`}
               class="w-full h-full object-contain"
             />
             {#if selectedProject.features.length > 0}
@@ -291,26 +317,26 @@
   {/if}
 
   <!-- Skills Section -->
-  <section id="skills" class="py-20">
+  <section id="skills" class="py-32">
     <div class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">
+        <h2 class="text-4xl font-bold mb-16 text-center">
           Technical <span class="text-primary">Expertise</span>
         </h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {#each techStack.slice(0, 4) as category, i}
             <div 
               in:fly={{ y: 50, duration: 500, delay: i * 100 }}
-              class="bg-white/5 rounded-lg border border-white/10 p-4 hover:border-primary/30 transition-colors duration-300"
+              class="bg-white/5 rounded-xl border border-white/10 p-6 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02]"
             >
-              <h3 class="text-lg font-bold mb-4 text-primary">{category.category}</h3>
-              <div class="grid grid-cols-2 gap-3">
+              <h3 class="text-xl font-bold mb-6 text-primary">{category.category}</h3>
+              <div class="grid grid-cols-2 gap-4">
                 {#each category.skills as skill}
-                  <div class="flex items-center gap-2 group">
-                    <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <iconify-icon icon={skill.icon} width="20"></iconify-icon>
+                  <div class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <iconify-icon icon={skill.icon} width="24"></iconify-icon>
                     </div>
-                    <span class="text-sm text-white/70 group-hover:text-primary transition-colors duration-300">{skill.name}</span>
+                    <span class="text-base text-white/70 group-hover:text-primary transition-colors duration-300">{skill.name}</span>
                   </div>
                 {/each}
               </div>
@@ -318,23 +344,23 @@
           {/each}
         </div>
 
-        <h3 class="text-2xl font-bold mt-12 mb-6 text-center">
+        <h3 class="text-3xl font-bold mt-20 mb-12 text-center">
           Additional <span class="text-primary">Specializations</span>
         </h3>
-        <div class="grid md:grid-cols-2 gap-6">
+        <div class="grid md:grid-cols-2 gap-8">
           {#each techStack.slice(4) as category, i}
             <div 
               in:fly={{ y: 50, duration: 500, delay: i * 100 }}
-              class="bg-white/5 rounded-lg border border-white/10 p-4 hover:border-primary/30 transition-colors duration-300"
+              class="bg-white/5 rounded-xl border border-white/10 p-6 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02]"
             >
-              <h3 class="text-lg font-bold mb-4 text-primary">{category.category}</h3>
-              <div class="grid grid-cols-2 gap-3">
+              <h3 class="text-xl font-bold mb-6 text-primary">{category.category}</h3>
+              <div class="grid grid-cols-2 gap-4">
                 {#each category.skills as skill}
-                  <div class="flex items-center gap-2 group">
-                    <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <iconify-icon icon={skill.icon} width="20"></iconify-icon>
+                  <div class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                      <iconify-icon icon={skill.icon} width="24"></iconify-icon>
                     </div>
-                    <span class="text-sm text-white/70 group-hover:text-primary transition-colors duration-300">{skill.name}</span>
+                    <span class="text-base text-white/70 group-hover:text-primary transition-colors duration-300">{skill.name}</span>
                   </div>
                 {/each}
               </div>
@@ -346,51 +372,70 @@
   </section>
 
   <!-- Experience Section -->
-  <section id="experience" class="py-20 bg-white/5">
+  <section id="experience" class="py-32 bg-white/5">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">
+        <h2 class="text-4xl font-bold mb-16 text-center">
           Professional <span class="text-primary">Experience</span>
         </h2>
-        <div class="space-y-6">
-          {#each experiences as exp, i}
-            <div 
-              in:fly={{ y: 50, duration: 500, delay: i * 100 }}
-              class="bg-black rounded-lg border border-white/10 p-4"
-            >
-              <div class="flex flex-col md:flex-row md:items-center gap-3 mb-3">
-                <h3 class="text-lg font-bold text-primary">{exp.title}</h3>
-                <div class="flex-1 h-px bg-white/10 hidden md:block"></div>
-                <p class="text-sm text-white/70">{exp.period}</p>
+        <div class="relative">
+          <!-- Timeline line -->
+          <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 to-transparent"></div>
+          
+          <div class="space-y-16">
+            {#each experiences as experience, i}
+              <div 
+                class="relative group"
+                in:fly={{ y: 50, duration: 500, delay: i * 200 }}
+              >
+                <!-- Timeline dot -->
+                <div class="absolute left-3 md:left-[calc(50%-0.5rem)] top-6 w-3 h-3 rounded-full bg-primary ring-4 ring-primary/20 group-hover:ring-8 transition-all duration-300"></div>
+                
+                <div class="ml-8 md:ml-0 md:flex md:justify-between md:items-start gap-8">
+                  <!-- Left side (dates) for desktop -->
+                  <div class="hidden md:block w-1/2 text-right pr-8">
+                    <p class="text-sm text-white/50">{experience.period}</p>
+                  </div>
+                  
+                  <!-- Content card -->
+                  <div class="md:w-1/2 md:pl-8">
+                    <div class="bg-black/50 rounded-xl p-8 border border-white/10 hover:border-primary/30 transition-all duration-300 group-hover:scale-[1.02]">
+                      <div class="flex flex-col gap-4">
+                        <div>
+                          <h3 class="text-2xl font-bold text-primary">{experience.title}</h3>
+                          <p class="text-white/70">{experience.company}</p>
+                        </div>
+                        <!-- Dates for mobile -->
+                        <p class="text-sm text-white/50 md:hidden">{experience.period}</p>
+                        <p class="text-white/70 leading-relaxed">{experience.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <p class="text-base font-medium mb-2 text-white">{exp.company}</p>
-              <p class="text-sm text-white/70">{exp.description}</p>
-            </div>
-          {/each}
+            {/each}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Education Section -->
-  <section id="education" class="py-20">
+  <!-- Contact Section -->
+  <section id="contact" class="py-32">
     <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">
-          <span class="text-primary">Education</span>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-8">
+          Get in <span class="text-primary">Touch</span>
         </h2>
-        <div class="space-y-6">
-          {#each education as edu, i}
-            <div 
-              in:fly={{ y: 50, duration: 500, delay: i * 100 }}
-              class="bg-white/5 rounded-lg border border-white/10 p-4"
-            >
-              <h3 class="text-lg font-bold mb-2 text-primary">{edu.degree}</h3>
-              <p class="text-base text-white">{edu.school}</p>
-              <p class="text-sm text-white/70">{edu.period}</p>
-            </div>
-          {/each}
-        </div>
+        <p class="text-xl text-white/70 mb-12 max-w-2xl mx-auto">
+          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+        </p>
+        <a href="mailto:{contactInfo.email}" class="btn btn-primary btn-lg group">
+          <span class="flex items-center gap-2">
+            <iconify-icon icon="material-symbols:mail-rounded" width="24"></iconify-icon>
+            Contact Me
+          </span>
+        </a>
       </div>
     </div>
   </section>
@@ -414,5 +459,34 @@
 
   :global(body) {
     margin-right: 0 !important;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .projects-container {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 8rem;
+  }
+
+  .projects-container > div {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    flex: 0 0 auto;
+    transform-origin: center;
+  }
+
+  @media (max-width: 768px) {
+    .projects-container {
+      padding: 0 4rem;
+    }
   }
 </style>

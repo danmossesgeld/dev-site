@@ -48,7 +48,7 @@
 			<!-- Desktop Navigation -->
 			<div class="hidden md:flex items-center justify-center flex-1">
 				<div class="flex space-x-8">
-					{#each ['About', 'Projects', 'Skills', 'Experience', 'Education'] as section}
+					{#each ['About', 'Projects', 'Skills', 'Experience'] as section}
 						<a 
 							href="#{section.toLowerCase()}" 
 							class="hover:text-primary transition-colors {activeSection === section.toLowerCase() ? 'text-primary' : 'text-white/70'}"
@@ -65,7 +65,7 @@
 				<a href="mailto:{contactInfo.email}" class="btn btn-sm btn-ghost text-white/70 hover:text-primary">
 					<iconify-icon icon="material-symbols:mail-rounded" width="20"></iconify-icon>
 				</a>
-				<a href="https://github.com/yourusername" target="_blank" class="btn btn-sm btn-ghost text-white/70 hover:text-primary">
+				<a href="https://github.com/danmossesgeld" target="_blank" class="btn btn-sm btn-ghost text-white/70 hover:text-primary">
 					<iconify-icon icon="mdi:github" width="20"></iconify-icon>
 				</a>
 				<!-- Mobile Menu Button -->
@@ -86,7 +86,7 @@
 			>
 				<div class="container mx-auto px-4 py-4">
 					<div class="flex flex-col space-y-4">
-						{#each ['About', 'Projects', 'Skills', 'Experience', 'Education'] as section}
+						{#each ['About', 'Projects', 'Skills', 'Experience'] as section}
 							<a 
 								href="#{section.toLowerCase()}" 
 								class="hover:text-primary transition-colors {activeSection === section.toLowerCase() ? 'text-primary' : 'text-white/70'}"
