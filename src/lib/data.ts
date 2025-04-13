@@ -13,19 +13,22 @@ export const experiences: Experience[] = [
 		title: 'Web Developer',
 		period: '2025 - Present',
 		company: 'Mage Technologies, Inc.',
-		description: 'Developing cloud-based enterprise solutions using modern web technologies. Building scalable applications with Firebase and SvelteKit. Implemented automated CI/CD pipelines and optimized application performance for high-traffic workloads.'
+		description: 'Developing cloud-based enterprise solutions using modern web technologies. Building scalable applications with Firebase and SvelteKit. Implemented automated CI/CD pipelines and optimized application performance for high-traffic workloads.',
+		technologies: ['SvelteKit', 'TypeScript', 'Firebase', 'TailwindCSS', 'DaisyUI', 'GitHub Actions']
 	},
 	{
 		title: 'Senior Developer',
 		period: '2023 - 2025',
 		company: 'Digisoft Business Solutions Inc.',
-		description: 'Led development of enterprise accounting systems with QuickBooks integration. Designed and implemented secure multi-tenant architecture serving 50+ business clients. Achieved 80% reduction in manual data entry through real-time synchronization systems.'
+		description: 'Led development of enterprise accounting systems with QuickBooks integration. Designed and implemented secure multi-tenant architecture serving 50+ business clients. Achieved 80% reduction in manual data entry through real-time synchronization systems.',
+		technologies: ['C#', '.NET', 'MSSQL', 'QuickBooks API', 'REST APIs', 'Crystal Reports']
 	},
 	{
 		title: 'Software Solutions Architect',
 		period: '2021 - 2023',
 		company: 'MinebeaMitsumi Inc.',
-		description: 'Architected and implemented real-time production monitoring systems improving manufacturing efficiency by 35%. Designed system architecture for cross-facility data integration. Led technical planning and implementation across 3 production facilities.'
+		description: 'Architected and implemented real-time production monitoring systems improving manufacturing efficiency by 35%. Designed system architecture for cross-facility data integration. Led technical planning and implementation across 3 production facilities.',
+		technologies: ['C#', '.NET', 'MSSQL', 'JavaScript', 'REST APIs', 'SignalR']
 	}
 ];
 

@@ -36,6 +36,7 @@ export interface Experience {
 	period: string;
 	company: string;
 	description: string;
+	technologies?: string[];
 }
 
 export interface Education {
