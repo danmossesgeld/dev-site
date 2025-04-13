@@ -28,14 +28,14 @@
 </script>
 
 <div 
-  class="group w-full max-w-7xl mx-auto"
-  in:fly={{ y: 50, duration: 500, delay: 200 }}
->
+  class="group w-full max-w-[1400px] mx-auto px-4" 
+  in:fly={{ y: 50, duration: 500, delay: 200 }}>
+  <!-- Increased max-width from 1200px to 1400px -->
   <div class="bg-black/50 rounded-2xl border border-white/10 overflow-hidden hover:border-primary/30 transition-all duration-300 backdrop-blur-sm">
     <div class="p-12">
-      <div class="flex flex-col lg:flex-row gap-20">
+      <div class="flex flex-col lg:flex-row gap-10"> <!-- Reduced gap from 20 to 10 -->
         <!-- Left Column - Project Info -->
-        <div class="lg:w-[45%]">
+        <div class="lg:w-[30%]"> <!-- Adjusted width from 40% to 30% -->
           <div class="flex flex-col gap-3 mb-4">
             <div class="relative group">
               <h3 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent relative z-10">
@@ -78,18 +78,18 @@
             {/if}
           </div>
 
-          <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+          <div class="border-t border-white/10 pt-6 mt-6">
             <div class="flex items-center gap-2 mb-4">
-              <iconify-icon icon="material-symbols:stack" class="text-primary" width="20"></iconify-icon>
-              <h4 class="text-base font-medium text-primary">Tech Stack</h4>
+              <h4 class="text-sm font-medium text-white/70">Tech Stack</h4>
+              <div class="h-[1px] flex-1 bg-white/10"></div>
             </div>
-            <div class="grid grid-cols-3 gap-3">
+            <div class="flex flex-wrap items-center gap-4">
               {#each project.tech as tech}
-                <div class="px-3 py-3 rounded-xl bg-black/50 backdrop-blur flex flex-col items-center gap-2 group hover:bg-primary/20 transition-all duration-300">
-                  <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-all duration-300">
-                    <iconify-icon icon={getTechIcon(tech)} width="28" height="28"></iconify-icon>
+                <div class="group flex items-center gap-2 hover:text-primary transition-all duration-300">
+                  <div class="w-6 h-6 flex items-center justify-center opacity-80 group-hover:opacity-100">
+                    <iconify-icon icon={getTechIcon(tech)} width="20" height="20"></iconify-icon>
                   </div>
-                  <span class="text-xs font-medium text-white/70 group-hover:text-primary transition-colors duration-300 text-center leading-tight">{tech}</span>
+                  <span class="text-sm text-white/70 group-hover:text-primary">{tech}</span>
                 </div>
               {/each}
             </div>
@@ -97,11 +97,11 @@
         </div>
 
         <!-- Right Column - Project Preview -->
-        <div class="lg:w-[55%]">
+        <div class="lg:w-[70%] flex-grow"> <!-- Adjusted width from 50% to 70% and added flex-grow to take all available space -->
           <div class="flex flex-col gap-6">
             <!-- Main Image Display -->
             <button 
-              class="relative aspect-[16/9] rounded-xl overflow-hidden bg-black cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all duration-300 shadow-lg group"
+              class="relative aspect-[16/9] rounded-xl overflow-hidden bg-black cursor-pointer hover:ring-2 hover:ring-primary/50 transition-all duration-300 shadow-lg group w-full"
               on:click={() => onModalOpen(project)}
               aria-label={`View ${project.title} screenshots`}
             >
@@ -109,7 +109,7 @@
                 <img 
                   src={screenshots[project.title][selectedImageIndex ?? 0]?.url ?? ''} 
                   alt={screenshots[project.title][selectedImageIndex ?? 0]?.caption ?? `Screenshot of ${project.title}`}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  class="w-full h-full object-contain object-center"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -124,18 +124,18 @@
 
             <!-- Feature Buttons -->
             {#if project.features.length > 0}
-              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2"> <!-- Reduced gap from 3 to 2 for smaller margins -->
                 {#each project.features as feature, index}
                   <button 
-                    class="group bg-black/50 backdrop-blur rounded-xl p-4 hover:bg-primary/10 transition-all duration-300 flex flex-col items-center text-center {selectedImageIndex === index ? 'ring-2 ring-primary bg-primary/10' : 'hover:scale-[1.02]'}"
+                    class="group bg-black/50 backdrop-blur rounded-xl p-3 hover:bg-primary/10 transition-all duration-300 flex flex-col items-center text-center {selectedImageIndex === index ? 'ring-2 ring-primary bg-primary/10' : 'hover:scale-[1.02]'}"
                     on:click={(e) => onFeatureSelect(index, e)}
-                    aria-label={`View ${feature.name} feature`}
+                    aria-label={`View ${feature.name} feature}`}
                   >
-                    <div class="w-10 h-10 flex items-center justify-center text-primary mb-3 bg-primary/10 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                      <iconify-icon icon={feature.icon} width="22"></iconify-icon>
+                    <div class="w-8 h-8 flex items-center justify-center text-primary mb-2 bg-primary/10 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                      <iconify-icon icon={feature.icon} width="18"></iconify-icon>
                     </div>
-                    <span class="text-sm font-medium text-white group-hover:text-primary transition-colors duration-300">{feature.name}</span>
-                    <p class="text-xs text-white/50 mt-1 line-clamp-2 group-hover:text-white/70 transition-colors duration-300">{feature.description}</p>
+                    <span class="text-xs font-medium text-white group-hover:text-primary transition-colors duration-300">{feature.name}</span>
+                    <p class="text-[11px] text-white/50 mt-0.5 line-clamp-2 group-hover:text-white/70 transition-colors duration-300">{feature.description}</p>
                   </button>
                 {/each}
               </div>
@@ -145,4 +145,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>

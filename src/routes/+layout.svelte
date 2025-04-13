@@ -13,7 +13,7 @@
 	});
 </script>
 
-<div class="min-h-screen flex flex-col bg-gradient-to-br from-base-100 to-base-200">
+<div class="min-h-screen flex flex-col bg-gradient-to-br from-base-100 to-base-200 px-4">
 	<!-- Animated background elements -->
 	<div class="fixed inset-0 overflow-hidden pointer-events-none">
 		<div class="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-5"></div>

@@ -39,7 +39,6 @@
   let selectedProject: Project | null = null;
   let showModal = false;
   let selectedImageIndex: number | null = null;
-  let projectsContainer: HTMLElement;
   let activeProjectIndex = 0;
 
   // Modal handlers
@@ -70,11 +69,12 @@
     }
   }
 
-  function handleScroll() {
-    if (projectsContainer) {
-      const scrollLeft = projectsContainer.scrollLeft;
-      const containerWidth = projectsContainer.clientWidth;
-      activeProjectIndex = Math.round(scrollLeft / containerWidth);
+  // Update activeProjectIndex when navigating
+  function navigateToSlide(index: number): void {
+    activeProjectIndex = (index + projects.length) % projects.length;
+    const targetSlide = document.getElementById(`slide-${activeProjectIndex}`);
+    if (targetSlide) {
+      targetSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   }
 
@@ -121,54 +121,26 @@
 
 <Navbar {activeSection} />
 
-<main class="pt-16 bg-black text-white">
+<main class="pt-12 bg-black text-white">
   <!-- Hero Section -->
-  <section id="about" class="min-h-screen relative flex items-center overflow-hidden">
-    <!-- Background elements -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
-    <div class="absolute top-1/2 -translate-y-1/2 right-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 -translate-y-1/2 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
-    
-    <div class="container mx-auto px-4 py-20 relative">
-      <div class="max-w-6xl mx-auto">
-        <div class="flex flex-col lg:flex-row items-center gap-12">
-          <div class="flex-1 text-center lg:text-left" in:fade={{ duration: 1000, delay: 200 }}>
-            <div class="mb-8">
-              <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-                <span class="text-primary">Dan Oscar</span><br/>
-                C. Mossesgeld
-              </h1>
-              <p class="text-2xl md:text-3xl text-white/70 mb-6">
-                {typedText}{#if cursorVisible}<span class="text-primary">|</span>{/if}
-              </p>
-            </div>
-            <p class="text-lg mb-8 text-white/70 bg-white/5 p-6 rounded-xl border border-white/10 max-w-2xl mx-auto lg:mx-0">
-              {professionalSummary}
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="mailto:{contactInfo.email}" class="btn btn-primary btn-lg group">
-                <span class="flex items-center gap-2">
-                  <iconify-icon icon="material-symbols:mail-rounded" width="24"></iconify-icon>
-                  Contact Me
-                </span>
-              </a>
-              <a href="#projects" class="btn btn-outline btn-lg text-white hover:text-black group">
-                <span class="flex items-center gap-2">
-                  <iconify-icon icon="material-symbols:code-rounded" width="24"></iconify-icon>
-                  View Projects
-                </span>
-              </a>
+  <section id="about" class="min-h-screen flex items-center overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-center gap-8">
+          <div class="flex-1 text-center lg:text-left">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+              <span class="text-primary">Dan Oscar</span> C. Mossesgeld
+            </h1>
+            <p class="text-lg text-white/70 mb-4">{typedText}{#if cursorVisible}<span class="text-primary">|</span>{/if}</p>
+            <p class="text-base text-white/70 bg-white/5 p-4 rounded border border-white/10 mb-4">{professionalSummary}</p>
+            <div class="flex gap-4 justify-center lg:justify-start">
+              <a href="mailto:{contactInfo.email}" class="btn btn-primary btn-sm">Contact Me</a>
+              <a href="#projects" class="btn btn-outline btn-sm">View Projects</a>
             </div>
           </div>
-          <div class="w-48 md:w-64 lg:w-80" in:fade={{ duration: 1000 }}>
-            <div class="aspect-square rounded-2xl bg-white/5 p-4 border border-white/10 relative group">
-              <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <img 
-                src="/icons/profilepic.png" 
-                alt="Profile picture of Dan Oscar C. Mossesgeld" 
-                class="rounded-xl object-cover w-full h-full relative z-10"
-              />
+          <div class="w-40 md:w-56">
+            <div class="aspect-square rounded bg-white/5 p-2 border border-white/10">
+              <img src="/icons/profilepic.png" alt="" class="rounded object-cover w-full h-full" />
             </div>
           </div>
         </div>
@@ -177,97 +149,23 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-32 bg-white/5 relative overflow-hidden">
-    <!-- Background elements -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
-    <div class="absolute top-0 left-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-primary/5 rounded-full blur-3xl"></div>
-    
-    <div class="container mx-auto px-4 relative">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-20">
-          <h2 class="text-4xl md:text-5xl font-bold mb-6">
-            Featured <span class="text-primary">Projects</span>
-          </h2>
-          <p class="text-xl text-white/70 max-w-2xl mx-auto">
-            A showcase of my most recent and impactful work, demonstrating my expertise in full-stack development and modern web technologies.
-          </p>
+  <section id="projects" class="py-16 bg-white/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">Featured <span class="text-primary">Projects</span></h2>
+          <p class="text-base text-white/70">A showcase of my most recent work.</p>
         </div>
-        
-        <div class="relative">
-          <!-- Breadcrumb Navigation -->
-          <div class="absolute -top-16 left-1/2 -translate-x-1/2 flex items-center gap-4 z-10">
-            {#each projects as project, i}
-              <button 
-                class="flex items-center gap-2 group relative"
-                on:click={() => {
-                  const container = document.querySelector('.projects-container');
-                  if (container) {
-                    container.scrollTo({
-                      left: i * container.clientWidth,
-                      behavior: 'smooth'
-                    });
-                  }
-                }}
-                aria-label={`Go to ${project.title}`}
-              >
-                <div class="flex flex-col items-center gap-1">
-                  <div class="w-3 h-3 rounded-full bg-white/20 group-hover:bg-primary transition-all duration-300 {activeProjectIndex === i ? 'bg-primary scale-150 ring-4 ring-primary/20' : ''}"></div>
-                  <span class="text-sm text-white/50 group-hover:text-white transition-colors duration-300 {activeProjectIndex === i ? 'text-white font-medium' : ''} whitespace-nowrap">
-                    {project.title}
-                  </span>
-                </div>
-                {#if i < projects.length - 1}
-                  <div class="w-8 h-px bg-white/20 group-hover:bg-primary/50 transition-colors duration-300"></div>
-                {/if}
-              </button>
-            {/each}
-          </div>
-
-          <!-- Scroll buttons -->
-          <button 
-            class="absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-primary/20 transition-all duration-300 z-10 backdrop-blur-sm -translate-x-8"
-            on:click={() => {
-              const container = document.querySelector('.projects-container');
-              if (container) {
-                container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
-              }
-            }}
-            aria-label="Scroll projects left"
-          >
-            <iconify-icon icon="material-symbols:chevron-left" width="32"></iconify-icon>
-          </button>
-          
-          <button 
-            class="absolute right-0 top-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white/70 hover:text-white hover:bg-primary/20 transition-all duration-300 z-10 backdrop-blur-sm translate-x-8"
-            on:click={() => {
-              const container = document.querySelector('.projects-container');
-              if (container) {
-                container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
-              }
-            }}
-            aria-label="Scroll projects right"
-          >
-            <iconify-icon icon="material-symbols:chevron-right" width="32"></iconify-icon>
-          </button>
-
-          <!-- Projects container -->
-          <div 
-            class="projects-container flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-16"
-            bind:this={projectsContainer}
-            on:scroll={handleScroll}
-          >
-            {#each projects as project, i}
-              <div class="flex-none w-[75vw] md:w-[55vw] lg:w-[45vw] snap-center px-8 {activeProjectIndex === i ? 'scale-100' : 'scale-95 opacity-70'} transition-all duration-500">
-                <ProjectCard 
-                  {project}
-                  {selectedImageIndex}
-                  onFeatureSelect={selectFeature}
-                  onModalOpen={openModal}
-                />
-              </div>
-            {/each}
-          </div>
+        <div class="carousel w-full">
+          {#each projects as project, i}
+            <div id={`slide-${i}`} class="carousel-item w-full flex justify-center">
+              <ProjectCard {project} {selectedImageIndex} onFeatureSelect={selectFeature} onModalOpen={openModal} />
+            </div>
+          {/each}
+        </div>
+        <div class="flex justify-between mt-4">
+          <button class="btn btn-circle btn-sm" on:click={() => navigateToSlide(activeProjectIndex - 1)}>❮</button>
+          <button class="btn btn-circle btn-sm" on:click={() => navigateToSlide(activeProjectIndex + 1)}>❯</button>
         </div>
       </div>
     </div>
@@ -276,11 +174,12 @@
   <!-- Screenshot Modal -->
   {#if showModal}
     <div 
+      role="button" 
+      tabindex="0" 
       class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-      on:click={closeModal}
+      on:click={closeModal} 
+      on:keydown={(e) => e.key === 'Enter' && closeModal()} 
       transition:fade={{ duration: 200 }}
-      role="dialog"
-      aria-modal="true"
       aria-label="Project Screenshot Modal"
     >
       <div class="relative w-full max-w-6xl h-[80vh]">
@@ -317,50 +216,21 @@
   {/if}
 
   <!-- Skills Section -->
-  <section id="skills" class="py-32">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-4xl font-bold mb-16 text-center">
-          Technical <span class="text-primary">Expertise</span>
-        </h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {#each techStack.slice(0, 4) as category, i}
-            <div 
-              in:fly={{ y: 50, duration: 500, delay: i * 100 }}
-              class="bg-white/5 rounded-xl border border-white/10 p-6 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02]"
-            >
-              <h3 class="text-xl font-bold mb-6 text-primary">{category.category}</h3>
-              <div class="grid grid-cols-2 gap-4">
+  <section id="skills" class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Technical <span class="text-primary">Expertise</span></h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          {#each techStack as category}
+            <div class="bg-white/5 rounded border border-white/10 p-4">
+              <h3 class="text-lg font-bold mb-4 text-primary">{category.category}</h3>
+              <div class="grid grid-cols-2 gap-2">
                 {#each category.skills as skill}
-                  <div class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <iconify-icon icon={skill.icon} width="24"></iconify-icon>
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 flex items-center justify-center rounded bg-primary/10 text-primary">
+                      <iconify-icon icon={skill.icon} width="16"></iconify-icon>
                     </div>
-                    <span class="text-base text-white/70 group-hover:text-primary transition-colors duration-300">{skill.name}</span>
-                  </div>
-                {/each}
-              </div>
-            </div>
-          {/each}
-        </div>
-
-        <h3 class="text-3xl font-bold mt-20 mb-12 text-center">
-          Additional <span class="text-primary">Specializations</span>
-        </h3>
-        <div class="grid md:grid-cols-2 gap-8">
-          {#each techStack.slice(4) as category, i}
-            <div 
-              in:fly={{ y: 50, duration: 500, delay: i * 100 }}
-              class="bg-white/5 rounded-xl border border-white/10 p-6 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02]"
-            >
-              <h3 class="text-xl font-bold mb-6 text-primary">{category.category}</h3>
-              <div class="grid grid-cols-2 gap-4">
-                {#each category.skills as skill}
-                  <div class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <iconify-icon icon={skill.icon} width="24"></iconify-icon>
-                    </div>
-                    <span class="text-base text-white/70 group-hover:text-primary transition-colors duration-300">{skill.name}</span>
+                    <span class="text-sm text-white/70">{skill.name}</span>
                   </div>
                 {/each}
               </div>
@@ -373,7 +243,7 @@
 
   <!-- Experience Section -->
   <section id="experience" class="py-32 bg-white/5">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-4xl font-bold mb-16 text-center">
           Professional <span class="text-primary">Experience</span>
@@ -421,21 +291,12 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-32">
-    <div class="container mx-auto px-4">
+  <section id="contact" class="py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-4xl font-bold mb-8">
-          Get in <span class="text-primary">Touch</span>
-        </h2>
-        <p class="text-xl text-white/70 mb-12 max-w-2xl mx-auto">
-          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-        </p>
-        <a href="mailto:{contactInfo.email}" class="btn btn-primary btn-lg group">
-          <span class="flex items-center gap-2">
-            <iconify-icon icon="material-symbols:mail-rounded" width="24"></iconify-icon>
-            Contact Me
-          </span>
-        </a>
+        <h2 class="text-3xl font-bold mb-4">Get in <span class="text-primary">Touch</span></h2>
+        <p class="text-base text-white/70 mb-4">I'm open to discussing new projects or opportunities.</p>
+        <a href="mailto:{contactInfo.email}" class="btn btn-primary btn-sm">Contact Me</a>
       </div>
     </div>
   </section>
@@ -459,34 +320,5 @@
 
   :global(body) {
     margin-right: 0 !important;
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .projects-container {
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 8rem;
-  }
-
-  .projects-container > div {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-    flex: 0 0 auto;
-    transform-origin: center;
-  }
-
-  @media (max-width: 768px) {
-    .projects-container {
-      padding: 0 4rem;
-    }
   }
 </style>
