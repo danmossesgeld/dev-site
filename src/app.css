@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--primary: 221 83% 53%;
+		--secondary: 215 100% 25%;
+		--accent: 210 40% 96%;
+		--neutral: 220 14% 96%;
+		--base-100: 0 0% 100%;
+		--base-200: 220 14% 96%;
+		--base-300: 220 13% 91%;
+		--base-content: 215 25% 27%;
+	}
+
+	[data-theme="dark"] {
+		--primary: 221 83% 53%;
+		--secondary: 215 100% 25%;
+		--accent: 210 40% 96%;
+		--neutral: 220 14% 96%;
+		--base-100: 222 47% 11%;
+		--base-200: 223 47% 7%;
+		--base-300: 224 50% 4%;
+		--base-content: 210 40% 98%;
+	}
+
+	body {
+		@apply bg-base-100 text-base-content;
+		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+	}
+}
+
+@layer components {
+	.section {
+		@apply py-20;
+	}
+
+	.heading {
+		@apply text-3xl font-bold mb-8 text-center;
+	}
+
+	.card {
+		@apply bg-base-100/95 backdrop-blur-sm border border-base-200/50;
+	}
+
+	.btn {
+		@apply transition-all duration-200;
+	}
+
+	.btn-primary {
+		@apply bg-primary text-white hover:bg-primary/90;
+	}
+
+	.btn-outline {
+		@apply border-primary text-primary hover:bg-primary/10;
+	}
+}
+
+@layer utilities {
+	.bg-gradient-radial {
+		background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
+	}
+
+	.text-gradient {
+		@apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+	}
+}
+
+/* Custom Animations */
+@keyframes float {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+.animate-float {
+	animation: float 3s ease-in-out infinite;
+}
+
+/* Glassmorphism */
+.glass {
+	@apply bg-base-100/95 backdrop-blur-sm border border-base-200/50;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-base-200;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-primary/50 rounded-full hover:bg-primary/70 transition-colors;
+}
+
+/* Timeline Styles */
+.timeline::before {
+	background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--secondary)));
+}
+
+.timeline-marker {
+	background: hsl(var(--primary));
+	box-shadow: 0 0 0 4px hsl(var(--base-100));
+}
+
+/* Project Card Hover Effects */
+.project-card {
+	@apply transition-all duration-300;
+}
+
+.project-card:hover {
+	@apply shadow-lg transform -translate-y-1;
+}
+
+/* Tech Stack Icons */
+.tech-icon {
+	@apply transition-transform duration-300;
+}
+
+.tech-icon:hover {
+	@apply transform scale-110;
+}
