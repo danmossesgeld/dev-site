@@ -12,10 +12,10 @@
       <div class="text-center mb-16 relative group">
         <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-transparent blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         <h2 class="text-4xl font-bold mb-4">
-          Technical <span class="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary animate-gradient-x">Expertise</span>
+          Core <span class="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary animate-gradient-x">Stack</span>
         </h2>
         <p class="text-lg text-white/60 max-w-2xl mx-auto">
-          A comprehensive overview of my technical skills and specializations in modern web development.
+          A comprehensive overview of my development stack and technical proficiencies in modern software engineering.
         </p>
       </div>
 
@@ -61,7 +61,7 @@
       <div class="relative mb-12">
         <div class="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"></div>
         <h3 class="text-2xl font-bold py-8 text-center relative">
-          Additional <span class="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary animate-gradient-x">Specializations</span>
+          Extended <span class="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary animate-gradient-x">Infrastructure</span>
         </h3>
       </div>
 

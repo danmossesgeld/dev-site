@@ -6,26 +6,12 @@
 	export let activeSection = 'about';
 	let isMobileMenuOpen = false;
 	let scrolled = false;
-	let theme = 'light';
 
 	onMount(() => {
-		// Check for saved theme preference
-		const savedTheme = localStorage.getItem('theme');
-		if (savedTheme) {
-			theme = savedTheme;
-			document.documentElement.setAttribute('data-theme', theme);
-		}
-
 		window.addEventListener('scroll', () => {
 			scrolled = window.scrollY > 50;
 		});
 	});
-
-	function toggleTheme() {
-		theme = theme === 'light' ? 'dark' : 'light';
-		document.documentElement.setAttribute('data-theme', theme);
-		localStorage.setItem('theme', theme);
-	}
 
 	function toggleMobileMenu() {
 		isMobileMenuOpen = !isMobileMenuOpen;
@@ -67,7 +53,7 @@
 			<!-- Desktop Navigation -->
 			<div class="hidden md:flex items-center justify-center flex-1 px-8">
 				<div class="flex gap-1">
-					{#each ['About', 'Projects', 'Skills', 'Experience', 'Education'] as section}
+					{#each ['About', 'Projects', 'Skills', 'Experience'] as section}
 						<a 
 							href="#{section.toLowerCase()}" 
 							class="relative px-4 py-2 rounded-lg hover:bg-base-content/5 transition-all duration-300 group"
@@ -85,35 +71,49 @@
 				</div>
 			</div>
 
-			<!-- Contact Icons and Theme Switcher -->
+			<!-- Contact Icons and Resume -->
 			<div class="flex items-center gap-2">
-				<!-- Theme Switcher -->
-				<button 
-					class="p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
-					on:click={toggleTheme}
-					title="Toggle theme"
-				>
-					<div class="transform transition-transform duration-300">
-						<iconify-icon icon={theme === 'light' ? "material-symbols:dark-mode" : "material-symbols:light-mode"} width="20"></iconify-icon>
-					</div>
-				</button>
-
 				<a 
 					href="mailto:{contactInfo.email}" 
 					class="group p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
+					title="Email me"
 				>
 					<div class="group-hover:scale-110 transition-transform duration-300">
 						<iconify-icon icon="material-symbols:mail-rounded" width="20"></iconify-icon>
 					</div>
 				</a>
 				<a 
-					href="https://github.com/yourusername" 
+					href="https://github.com/danmossesgeld" 
 					target="_blank" 
 					class="group p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
+					title="GitHub Profile"
 				>
 					<div class="group-hover:scale-110 transition-transform duration-300">
 						<iconify-icon icon="mdi:github" width="20"></iconify-icon>
 					</div>
+				</a>
+				<a 
+					href="https://facebook.com/danmossesgeld" 
+					target="_blank" 
+					class="group p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
+					title="Facebook Profile"
+				>
+					<div class="group-hover:scale-110 transition-transform duration-300">
+						<iconify-icon icon="ic:baseline-facebook" width="20"></iconify-icon>
+					</div>
+				</a>
+				<div class="w-px h-6 bg-base-content/10 mx-1"></div>
+				<a 
+					href="/RESUME - Dan Mossesgeld.pdf" 
+					target="_blank"
+					class="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 border border-primary/20 hover:border-primary/30"
+				>
+					<iconify-icon 
+						icon="material-symbols:download-rounded" 
+						class="group-hover:scale-110 transition-transform duration-300" 
+						width="18"
+					></iconify-icon>
+					<span class="text-sm font-medium">Resume</span>
 				</a>
 				<!-- Mobile Menu Button -->
 				<button 
@@ -136,7 +136,7 @@
 			>
 				<div class="container mx-auto px-4 py-6">
 					<div class="flex flex-col gap-2">
-						{#each ['About', 'Projects', 'Skills', 'Experience', 'Education'] as section}
+						{#each ['About', 'Projects', 'Skills', 'Experience'] as section}
 							<a 
 								href="#{section.toLowerCase()}" 
 								class="relative p-4 rounded-lg hover:bg-base-content/5 transition-all duration-300 group flex items-center gap-3"
@@ -148,8 +148,7 @@
 										section === 'About' ? 'material-symbols:person' :
 										section === 'Projects' ? 'material-symbols:code' :
 										section === 'Skills' ? 'material-symbols:analytics' :
-										section === 'Experience' ? 'material-symbols:work' :
-										'material-symbols:school'
+										'material-symbols:work'
 									} width="20"></iconify-icon>
 								</div>
 								<span class="text-base font-medium {activeSection === section.toLowerCase() ? 'text-primary' : 'text-base-content/70 group-hover:text-base-content'} transition-colors duration-300">
@@ -160,6 +159,53 @@
 								{/if}
 							</a>
 						{/each}
+						
+						<!-- Mobile Social Links -->
+						<div class="mt-4 flex items-center justify-center gap-4 p-4 rounded-lg bg-base-content/5">
+							<a 
+								href="mailto:{contactInfo.email}" 
+								class="group p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
+								title="Email me"
+							>
+								<div class="group-hover:scale-110 transition-transform duration-300">
+									<iconify-icon icon="material-symbols:mail-rounded" width="24"></iconify-icon>
+								</div>
+							</a>
+							<a 
+								href="https://github.com/danmossesgeld" 
+								target="_blank" 
+								class="group p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
+								title="GitHub Profile"
+							>
+								<div class="group-hover:scale-110 transition-transform duration-300">
+									<iconify-icon icon="mdi:github" width="24"></iconify-icon>
+								</div>
+							</a>
+							<a 
+								href="https://facebook.com/danmossesgeld" 
+								target="_blank" 
+								class="group p-2 rounded-lg hover:bg-base-content/5 text-base-content/70 hover:text-primary transition-all duration-300"
+								title="Facebook Profile"
+							>
+								<div class="group-hover:scale-110 transition-transform duration-300">
+									<iconify-icon icon="ic:baseline-facebook" width="24"></iconify-icon>
+								</div>
+							</a>
+						</div>
+						
+						<!-- Mobile Resume Download -->
+						<a 
+							href="/RESUME - Dan Mossesgeld.pdf" 
+							target="_blank"
+							class="mt-2 group flex items-center justify-center gap-2 p-4 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300"
+						>
+							<iconify-icon 
+								icon="material-symbols:download-rounded" 
+								class="group-hover:scale-110 transition-transform duration-300" 
+								width="24"
+							></iconify-icon>
+							<span class="text-base font-medium">Download Resume</span>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -168,26 +214,7 @@
 </nav>
 
 <style>
-	.active-nav::before {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 4px;
-		height: 4px;
-		border-radius: 50%;
-		background-color: var(--color-primary);
-		opacity: 0;
-		transition: all 0.3s ease;
-	}
-
-	.active-nav:hover::before {
-		opacity: 1;
-	}
-
-	@keyframes nav-glow {
-		0%, 100% { box-shadow: 0 0 5px var(--color-primary); }
-		50% { box-shadow: 0 0 15px var(--color-primary); }
+	:global(.active-nav) {
+		color: rgb(var(--color-primary-rgb));
 	}
 </style> 

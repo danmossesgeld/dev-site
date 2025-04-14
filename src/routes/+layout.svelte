@@ -12,23 +12,23 @@
 			scrolled = window.scrollY > 50;
 		});
 
-		// Initialize binary numbers
-		binaryNumbers = Array.from({ length: 50 }, () => ({
+		// Initialize binary numbers with fewer elements
+		binaryNumbers = Array.from({ length: 20 }, () => ({
 			value: Math.random() > 0.5 ? '1' : '0',
 			x: Math.random() * 100,
 			y: Math.random() * 100,
-			speed: Math.random() * 0.5 + 0.2,
-			opacity: Math.random() * 0.15 + 0.1
+			speed: Math.random() * 0.3 + 0.1, // Reduced speed
+			opacity: Math.random() * 0.1 + 0.05 // Reduced opacity
 		}));
 
-		// Animate binary numbers
+		// Animate binary numbers with reduced frequency
 		const animate = () => {
 			binaryNumbers = binaryNumbers.map(num => {
 				const newY = (num.y + num.speed) % 100;
 				return {
 					...num,
 					y: newY,
-					value: Math.random() > 0.95 ? (num.value === '1' ? '0' : '1') : num.value
+					value: Math.random() > 0.98 ? (num.value === '1' ? '0' : '1') : num.value // Reduced change frequency
 				};
 			});
 			requestAnimationFrame(animate);

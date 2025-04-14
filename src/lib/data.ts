@@ -10,25 +10,39 @@ efficient development workflows.`;
 
 export const experiences: Experience[] = [
 	{
-		title: 'Web Developer',
+		title: 'Full Stack Web Developer',
 		period: '2025 - Present',
 		company: 'Mage Technologies, Inc.',
-		description: 'Developing cloud-based enterprise solutions using modern web technologies. Building scalable applications with Firebase and SvelteKit. Implemented automated CI/CD pipelines and optimized application performance for high-traffic workloads.',
-		technologies: ['SvelteKit', 'TypeScript', 'Firebase', 'TailwindCSS', 'DaisyUI', 'GitHub Actions']
+		description: 'Collaborated with a team of developers using GitHub as the primary platform to design, build, and deploy web-based ERP and POS systems. Implemented modern web technologies and cloud solutions for enterprise applications.',
+		technologies: ['SvelteKit', 'TypeScript', 'Firebase', 'GitHub', 'TailwindCSS', 'DaisyUI']
 	},
 	{
-		title: 'Senior Developer',
+		title: 'Full Stack .NET Developer',
 		period: '2023 - 2025',
 		company: 'Digisoft Business Solutions Inc.',
-		description: 'Led development of enterprise accounting systems with QuickBooks integration. Designed and implemented secure multi-tenant architecture serving 50+ business clients. Achieved 80% reduction in manual data entry through real-time synchronization systems.',
-		technologies: ['C#', '.NET', 'MSSQL', 'QuickBooks API', 'REST APIs', 'Crystal Reports']
+		description: 'Designed and developed custom .NET-based accounting systems with advanced financial reporting and transaction management. Implemented QuickBooks integration and SAP Crystal Reports. Provided technical support and consultation to clients.',
+		technologies: ['C#', '.NET', 'MSSQL', 'QuickBooks SDK', 'SAP Crystal Reports']
 	},
 	{
-		title: 'Software Solutions Architect',
-		period: '2021 - 2023',
+		title: 'Full Stack .NET Developer',
+		period: '2022 - 2023',
 		company: 'MinebeaMitsumi Inc.',
-		description: 'Architected and implemented real-time production monitoring systems improving manufacturing efficiency by 35%. Designed system architecture for cross-facility data integration. Led technical planning and implementation across 3 production facilities.',
-		technologies: ['C#', '.NET', 'MSSQL', 'JavaScript', 'REST APIs', 'SignalR']
+		description: 'Developed production monitoring software for real-time data visualization and analysis. Led training sessions and provided technical support for international teams. Implemented solutions to improve production efficiency and problem resolution.',
+		technologies: ['C#', '.NET', 'MSSQL', 'JavaScript', 'Data Visualization']
+	},
+	{
+		title: 'Freelance IT Technician',
+		period: '2015 - Present',
+		company: 'Freelance',
+		description: 'Provided hardware and software maintenance, custom PC building, and system configuration services. Diagnosed and resolved technical issues, optimized system performance, and delivered tailored solutions for diverse client needs.',
+		technologies: ['Hardware Maintenance', 'System Configuration', 'Software Installation', 'PC Building', 'Troubleshooting']
+	},
+	{
+		title: 'Student I.T. Support',
+		period: '2018 - 2021',
+		company: 'Polytechnic University of the Philippines - Bataan',
+		description: 'Provided technical support for hardware and network issues. Performed system maintenance, malware removal, and OS updates. Assisted students and staff with technical problems and system optimizations.',
+		technologies: ['Technical Support', 'System Maintenance', 'Network Troubleshooting', 'OS Management', 'Hardware Repair']
 	}
 ];
 
@@ -226,81 +240,122 @@ export const projects: Project[] = [
 	},
 	{
 		title: "QuickBooks Desktop Integration",
-		description: "Custom API integration solution enabling seamless data synchronization between enterprise systems and QuickBooks Desktop. Features automated transaction posting and real-time sync.",
-		tech: [".NET", "C#", "QuickBooks SDK", "REST API"],
+		description: "Custom API integration solution enabling seamless data synchronization between enterprise systems and QuickBooks Desktop. Features automated transaction posting, real-time sync, and comprehensive reporting tools with Crystal Reports integration.",
+		tech: ["VB.NET", "MSSQL", "Crystal Reports", "Visual Studio", "QuickBooks SDK"],
 		status: "Completed",
 		date: "2022 - 2023",
 		sourceUrl: "#",
 		liveUrl: "#",
-		features: []
+		features: [
+			{
+				name: "Multi-Form Data Extraction",
+				description: "Multiple specialized forms for efficient data extraction and processing from QuickBooks Desktop",
+				icon: "material-symbols:dashboard-customize-rounded",
+				imageIndex: 0
+			},
+			{
+				name: "Auto-Generated IDs",
+				description: "Automated document ID generation system with cloud SQL synchronization for reliable tracking",
+				icon: "material-symbols:cloud-sync-rounded",
+				imageIndex: 1
+			},
+			{
+				name: "Check Printing Tool",
+				description: "Integrated check printing functionality with customizable templates and security features",
+				icon: "material-symbols:payments-rounded",
+				imageIndex: 2
+			},
+			{
+				name: "Crystal Reports Integration",
+				description: "Fully customizable report generation and printouts using Crystal Reports",
+				icon: "material-symbols:description-rounded",
+				imageIndex: 3
+			},
+			{
+				name: "Report Management",
+				description: "Comprehensive system for managing saved reports, generation tools, and documentation details",
+				icon: "material-symbols:folder-managed-rounded",
+				imageIndex: 4
+			}
+		]
 	}
 ];
 
 export const techStack: TechStackCategory[] = [
 	{
-		category: "Frontend Development",
+		category: 'Frontend Technologies',
 		skills: [
-			{ name: "SvelteKit", icon: "logos:svelte-icon" },
-			{ name: "TypeScript", icon: "logos:typescript-icon" },
-			{ name: "TailwindCSS", icon: "logos:tailwindcss-icon" },
-			{ name: "DaisyUI", icon: "logos:daisyui" },
-			{ name: "React", icon: "logos:react" },
-			{ name: "Vue", icon: "logos:vue" }
+			{ name: 'SvelteKit', icon: 'logos:svelte-icon' },
+			{ name: 'TypeScript', icon: 'logos:typescript-icon' },
+			{ name: 'JavaScript', icon: 'logos:javascript' },
+			{ name: 'HTML5', icon: 'logos:html-5' },
+			{ name: 'CSS3', icon: 'logos:css-3' },
+			{ name: 'TailwindCSS', icon: 'logos:tailwindcss-icon' },
+			{ name: 'DaisyUI', icon: 'logos:tailwindcss-icon' },
+			{ name: 'Responsive Design', icon: 'material-symbols:devices-rounded' }
 		]
 	},
 	{
-		category: "Backend Development",
+		category: 'Backend & Database',
 		skills: [
-			{ name: ".NET Core", icon: "logos:dotnet" },
-			{ name: "C#", icon: "logos:c-sharp" },
-			{ name: "Firebase", icon: "logos:firebase" },
-			{ name: "Node.js", icon: "logos:nodejs-icon" },
-			{ name: "REST APIs", icon: "logos:swagger" },
-			{ name: "GraphQL", icon: "logos:graphql" }
+			{ name: 'VB.NET', icon: 'logos:dotnet' },
+			{ name: 'C#', icon: 'logos:c-sharp' },
+			{ name: '.NET', icon: 'logos:dotnet' },
+			{ name: 'MSSQL', icon: 'logos:microsoft-sql-server' },
+			{ name: 'ASP.NET', icon: 'logos:dotnet' },
+			{ name: 'Firebase', icon: 'logos:firebase' },
+			{ name: 'Firestore', icon: 'logos:firebase' },
+			{ name: 'RESTful APIs', icon: 'material-symbols:api-rounded' }
 		]
 	},
 	{
-		category: "Database & Cloud",
+		category: 'Development Ecosystem',
 		skills: [
-			{ name: "MSSQL", icon: "material-symbols:database" },
-			{ name: "Firebase", icon: "logos:firebase" },
-			{ name: "MongoDB", icon: "logos:mongodb-icon" },
-			{ name: "MySQL", icon: "material-symbols:database" },
-			{ name: "Redis", icon: "logos:redis" },
-			{ name: "Docker", icon: "logos:docker-icon" }
+			{ name: 'Git', icon: 'logos:git-icon' },
+			{ name: 'GitHub', icon: 'logos:github-icon' },
+			{ name: 'VS Code', icon: 'logos:visual-studio-code' },
+			{ name: 'Cursor', icon: 'logos:visual-studio-code' },
+			{ name: 'Visual Studio', icon: 'logos:visual-studio' },
+			{ name: 'CI/CD', icon: 'material-symbols:sync-rounded' },
+			{ name: 'Docker', icon: 'logos:docker-icon' }
 		]
 	},
 	{
-		category: "Development Tools",
+		category: 'Enterprise Solutions',
 		skills: [
-			{ name: "Git", icon: "logos:git-icon" },
-			{ name: "GitHub", icon: "logos:github-icon" },
-			{ name: "VS Code", icon: "logos:visual-studio-code" },
-			{ name: "Postman", icon: "logos:postman-icon" },
-			{ name: "Figma", icon: "logos:figma" },
-			{ name: "Azure DevOps", icon: "logos:azure-icon" }
+			{ name: 'QuickBooks SDK', icon: 'material-symbols:account-balance-rounded' },
+			{ name: 'SAP Crystal Reports', icon: 'material-symbols:description-rounded' },
+			{ name: 'Data Visualization', icon: 'material-symbols:analytics-rounded' },
+			{ name: 'Microsoft Office', icon: 'logos:microsoft-icon' },
+			{ name: 'ERP Systems', icon: 'material-symbols:business-center-rounded' },
+			{ name: 'POS Systems', icon: 'material-symbols:point-of-sale-rounded' },
+			{ name: 'Accounting Software', icon: 'material-symbols:payments-rounded' }
 		]
 	},
 	{
-		category: "Hardware & Networking",
+		category: 'Cloud & Infrastructure',
 		skills: [
-			{ name: "Network Administration", icon: "material-symbols:settings-ethernet-rounded" },
-			{ name: "System Maintenance", icon: "material-symbols:settings-suggest-rounded" },
-			{ name: "Hardware Troubleshooting", icon: "material-symbols:build-rounded" },
-			{ name: "Server Management", icon: "material-symbols:dns-rounded" },
-			{ name: "Data Recovery", icon: "material-symbols:restore-rounded" },
-			{ name: "Security Systems", icon: "material-symbols:security-rounded" }
+			{ name: 'Firebase Hosting', icon: 'logos:firebase' },
+			{ name: 'Cloud Functions', icon: 'material-symbols:cloud-rounded' },
+			{ name: 'System Configuration', icon: 'material-symbols:settings-rounded' },
+			{ name: 'Network Infrastructure', icon: 'material-symbols:network-node-rounded' },
+			{ name: 'Server Management', icon: 'material-symbols:dns-rounded' },
+			{ name: 'Security Protocols', icon: 'material-symbols:security-rounded' },
+			{ name: 'Performance Optimization', icon: 'material-symbols:speed-rounded' }
 		]
 	},
 	{
-		category: "IT Support & Systems",
+		category: 'Technical Support',
 		skills: [
-			{ name: "Windows Server", icon: "logos:microsoft-windows" },
-			{ name: "Linux Systems", icon: "logos:linux-tux" },
-			{ name: "Active Directory", icon: "material-symbols:admin-panel-settings-rounded" },
-			{ name: "Virtualization", icon: "material-symbols:layers-rounded" },
-			{ name: "IT Asset Management", icon: "material-symbols:inventory-2-rounded" },
-			{ name: "Help Desk Support", icon: "material-symbols:help-center-rounded" }
+			{ name: 'System Maintenance', icon: 'material-symbols:build-circle-rounded' },
+			{ name: 'Malware Removal', icon: 'material-symbols:security-update-good-rounded' },
+			{ name: 'OS Management', icon: 'material-symbols:computer-rounded' },
+			{ name: 'Hardware Repair', icon: 'material-symbols:tools-wrench-rounded' },
+			{ name: 'Software Installation', icon: 'material-symbols:install-desktop-rounded' },
+			{ name: 'System Optimization', icon: 'material-symbols:tune-rounded' },
+			{ name: 'Technical Support', icon: 'material-symbols:support-agent-rounded' },
+			{ name: 'Troubleshooting', icon: 'material-symbols:troubleshoot-rounded' },
+			{ name: 'PC Building', icon: 'material-symbols:precision-manufacturing-rounded' }
 		]
 	}
 ];
@@ -339,8 +394,10 @@ export const screenshots: Screenshots = {
 		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=POS+Reports", caption: "Sales Reports" }
 	],
 	"QuickBooks Desktop Integration": [
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=QB+Integration", caption: "Integration Dashboard" },
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=QB+Sync", caption: "Sync Status" },
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=QB+Mapping", caption: "Data Mapping" }
+		{ url: "/projectimages/qbintegration/mainscreen (multiple forms for data extracting.png", caption: "Multi-Form Data Extraction Interface" },
+		{ url: "/projectimages/qbintegration/documents have auto generated ID and saved to cloud SQL.png", caption: "Auto-Generated Document IDs" },
+		{ url: "/projectimages/qbintegration/check printing tool.png", caption: "Check Printing Tool" },
+		{ url: "/projectimages/qbintegration/fully customizable printout using crystal report.png", caption: "Customizable Crystal Reports" },
+		{ url: "/projectimages/qbintegration/form that shows saved reports, report generation tool and documentation details .jpg", caption: "Report Management System" }
 	]
 }; 
