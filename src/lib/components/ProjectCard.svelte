@@ -2,6 +2,7 @@
   import type { Project } from '$lib/types';
   import type { Screenshots } from '$lib/types';
   import { onMount, onDestroy } from 'svelte';
+  import { base } from '$app/paths';
 
   export let project: Project;
   export let screenshots: Screenshots;
@@ -132,7 +133,7 @@
                 <div class="px-3 py-2 rounded-md bg-black/50 backdrop-blur-sm flex items-center gap-2 group/deploy hover:bg-primary/10 transition-all duration-300 border border-white/5 hover:border-primary/20">
                   <div class="w-8 h-8 flex items-center justify-center bg-white/5 rounded-md group-hover/deploy:bg-primary/10 transition-all duration-300 overflow-hidden">
                     {#if deployment.icon.startsWith('/')}
-                      <img src={deployment.icon} alt={deployment.name} class="w-6 h-6 object-contain" />
+                      <img src="{base}{deployment.icon}" alt={deployment.name} class="w-6 h-6 object-contain" />
                     {:else}
                       <iconify-icon icon={deployment.icon} width="16" height="16" class="text-white/70 group-hover/deploy:text-primary transition-colors duration-300"></iconify-icon>
                     {/if}
@@ -158,7 +159,7 @@
           >
             {#if screenshots[project.title]?.length > 0 && screenshots[project.title][selectedImageIndex ?? 0]?.url}
               <img 
-                src={screenshots[project.title][selectedImageIndex ?? 0].url} 
+                src="{base}{screenshots[project.title][selectedImageIndex ?? 0].url}" 
                 alt={screenshots[project.title][selectedImageIndex ?? 0].caption ?? 'Project screenshot'}
                 class="w-full h-full object-contain bg-black/80 group-hover/img:scale-[1.02] transition-transform duration-500 {fadeOut ? 'opacity-0' : 'opacity-100'} transition-opacity duration-600"
               />
