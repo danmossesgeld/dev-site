@@ -17,7 +17,7 @@ const config = {
 			fallback: 'index.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/cv-site' : ''
+			base: process.env.NODE_ENV === 'production' ? '/dev-site' : ''
 		}
 	}
 };
