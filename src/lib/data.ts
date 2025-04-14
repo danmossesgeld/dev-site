@@ -79,38 +79,38 @@ export const projects: Project[] = [
 		],
 		features: [
 			{
-				name: "Main Dashboard",
-				description: "Comprehensive dashboard providing overview of financial status, key metrics, and quick access to all accounting modules",
+				name: "Financial Analytics Dashboard",
+				description: "Comprehensive financial metrics dashboard with KPI monitoring and trend analysis",
 				icon: "material-symbols:dashboard-rounded",
 				imageIndex: 0
 			},
 			{
 				name: "Master Data Management",
-				description: "Centralized management of company accounts, products, assets, customers, and vendors with detailed tracking and categorization",
+				description: "Centralized database for company accounts, products, assets, and business relationships",
 				icon: "material-symbols:database-rounded",
 				imageIndex: 1
 			},
 			{
-				name: "Financial Reports",
-				description: "Multiple accounting and management reports including balance sheets, income statements, and custom financial analysis",
+				name: "Financial Reporting System",
+				description: "Multi-format financial reporting with automated reconciliation and custom analysis tools",
 				icon: "material-symbols:summarize-rounded",
 				imageIndex: 2
 			},
 			{
-				name: "Sales Management",
-				description: "Complete sales cycle management including customer invoicing, delivery receipts, sales orders, and billing statements",
+				name: "Sales Management System",
+				description: "Integrated sales workflow with transaction processing and revenue tracking",
 				icon: "material-symbols:receipt-long-rounded",
 				imageIndex: 3
 			},
 			{
 				name: "Purchase Management",
-				description: "Vendor management system with purchase orders, receiving reports, accounts payable, and debit memo processing",
+				description: "Vendor management and procurement system with performance tracking",
 				icon: "material-symbols:inventory-2-rounded",
 				imageIndex: 4
 			},
 			{
-				name: "Report Generation",
-				description: "Integrated Crystal Reports for professional document generation and printing across all accounting forms",
+				name: "Crystal Reports Integration",
+				description: "Professional report generation with customizable templates and multiple export formats",
 				icon: "material-symbols:print-rounded",
 				imageIndex: 5
 			}
@@ -126,26 +126,26 @@ export const projects: Project[] = [
 		liveUrl: "#",
 		features: [
 			{
-				name: "Department Production Dashboard",
-				description: "Real-time monitoring of all production lines with live data visualization and performance metrics across the entire manufacturing department",
+				name: "Department Overview",
+				description: "Real-time monitoring dashboard for multiple production lines with live data streams",
 				icon: "material-symbols:monitoring-rounded",
 				imageIndex: 0
 			},
 			{
-				name: "Line Production Tracking",
-				description: "Individual production line monitoring with real-time output tracking, efficiency metrics, and live status updates",
+				name: "Production Line Analytics",
+				description: "Live performance tracking with OEE calculations and throughput analysis",
 				icon: "material-symbols:analytics-rounded",
 				imageIndex: 1
 			},
 			{
-				name: "Department Loss Time Analysis",
-				description: "Comprehensive error tracking system showing loss times and manufacturing issues across all production lines in real-time",
+				name: "Line Fault Monitoring",
+				description: "Real-time production line issue tracking with downtime analysis",
 				icon: "material-symbols:error-circle-rounded",
 				imageIndex: 2
 			},
 			{
-				name: "Line Error Monitoring",
-				description: "Detailed error tracking for individual production lines with real-time alerts and loss time analysis for immediate response",
+				name: "Department Error Overview",
+				description: "Comprehensive error tracking across production areas with loss time analysis",
 				icon: "material-symbols:warning-outline-rounded",
 				imageIndex: 3
 			}
@@ -162,67 +162,67 @@ export const projects: Project[] = [
 		features: [
 			{
 				name: "Reactive Homepage",
-				description: "Dynamic content updates with real-time data synchronization",
+				description: "Dynamic content management with real-time data synchronization",
 				icon: "material-symbols:home-rounded",
 				imageIndex: 0
 			},
 			{
-				name: "Dynamic Categories",
-				description: "Flexible category management with sorting and filtering",
+				name: "Category Management",
+				description: "Flexible product categorization system with advanced filtering options",
 				icon: "material-symbols:category-rounded",
 				imageIndex: 1
 			},
 			{
-				name: "Category Sorting",
-				description: "Advanced sorting and organization of product categories",
+				name: "Data Organization",
+				description: "Efficient data structure with optimized search and sorting capabilities",
 				icon: "material-symbols:sort-rounded",
 				imageIndex: 2
 			},
 			{
-				name: "Product Cards",
-				description: "Visually appealing product display with essential information",
+				name: "Product Display System",
+				description: "Optimized product presentation with efficient image loading",
 				icon: "material-symbols:view-card-rounded",
 				imageIndex: 3
 			},
 			{
-				name: "Product Registration",
-				description: "Streamlined product creation and inventory management",
+				name: "Product Management",
+				description: "Streamlined product registration with automated validation",
 				icon: "material-symbols:add-box-rounded",
 				imageIndex: 4
 			},
 			{
-				name: "Product Editing",
-				description: "Comprehensive product information management",
+				name: "Content Management",
+				description: "Real-time product updates with automatic data synchronization",
 				icon: "material-symbols:edit-rounded",
 				imageIndex: 5
 			},
 			{
-				name: "Admin Dashboard",
-				description: "Powerful admin interface with real-time analytics",
+				name: "Analytics Dashboard",
+				description: "Performance monitoring with comprehensive metrics visualization",
 				icon: "material-symbols:dashboard-rounded",
 				imageIndex: 6
 			},
 			{
 				name: "Firetable Integration",
-				description: "Advanced data management with Firetable",
+				description: "Cloud-based data management with collaborative features",
 				icon: "material-symbols:table-view-rounded",
 				imageIndex: 7
 			},
 			{
-				name: "Mobile Ready",
-				description: "Fully responsive design for all devices",
+				name: "Responsive Design",
+				description: "Cross-platform compatibility with adaptive layouts",
 				icon: "material-symbols:devices-rounded",
 				imageIndex: 8
 			},
 			{
-				name: "Theme Support",
-				description: "Multiple theme options for customization",
+				name: "Theme System",
+				description: "Dynamic theme management with real-time style updates",
 				icon: "material-symbols:palette-rounded",
 				imageIndex: 9
 			},
 			{
-				name: "Persistent Cart",
-				description: "Shopping cart that persists across sessions",
+				name: "Shopping Cart System",
+				description: "Persistent cart functionality with offline support",
 				icon: "material-symbols:shopping-cart-rounded",
 				imageIndex: 10
 			}
@@ -248,32 +248,32 @@ export const projects: Project[] = [
 		liveUrl: "#",
 		features: [
 			{
-				name: "Multi-Form Data Extraction",
-				description: "Multiple specialized forms for efficient data extraction and processing from QuickBooks Desktop",
+				name: "Data Integration System",
+				description: "Automated data extraction and validation from QuickBooks Desktop",
 				icon: "material-symbols:dashboard-customize-rounded",
 				imageIndex: 0
 			},
 			{
-				name: "Auto-Generated IDs",
-				description: "Automated document ID generation system with cloud SQL synchronization for reliable tracking",
+				name: "Document Management",
+				description: "Secure document handling with cloud synchronization",
 				icon: "material-symbols:cloud-sync-rounded",
 				imageIndex: 1
 			},
 			{
-				name: "Check Printing Tool",
-				description: "Integrated check printing functionality with customizable templates and security features",
+				name: "Check Processing System",
+				description: "Professional check printing with security features and MICR encoding",
 				icon: "material-symbols:payments-rounded",
 				imageIndex: 2
 			},
 			{
-				name: "Crystal Reports Integration",
-				description: "Fully customizable report generation and printouts using Crystal Reports",
+				name: "Report Generation",
+				description: "Customizable reporting system with parameterized templates",
 				icon: "material-symbols:description-rounded",
 				imageIndex: 3
 			},
 			{
-				name: "Report Management",
-				description: "Comprehensive system for managing saved reports, generation tools, and documentation details",
+				name: "Document Control",
+				description: "Version-controlled document management with audit tracking",
 				icon: "material-symbols:folder-managed-rounded",
 				imageIndex: 4
 			}

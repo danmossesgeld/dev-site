@@ -176,25 +176,59 @@
           <!-- Feature Buttons -->
           {#if project.features.length > 0}
             <div 
-              class="grid grid-cols-2 sm:grid-cols-3 gap-2"
+              class="flex flex-col gap-2"
               on:mouseenter={handleMouseEnter}
               on:mouseleave={handleMouseLeave}
             >
-              {#each project.features as feature, featureIndex}
-                <button 
-                  class="group/feat bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-sm rounded-md p-3 hover:bg-white/5 transition-all duration-300 flex flex-col items-center text-center border border-white/10 hover:border-primary/20 {selectedImageIndex === feature.imageIndex ? 'ring-2 ring-primary/30 bg-primary/5 border-primary/20' : 'hover:scale-[1.02]'}"
-                  on:click={() => {
-                    selectedImageIndex = feature.imageIndex;
-                    currentFeatureIndex = featureIndex;
-                  }}
-                >
-                  <div class="w-8 h-8 flex items-center justify-center text-white mb-2 bg-white/10 rounded-md group-hover/feat:bg-primary/10 group-hover/feat:scale-110 transition-all duration-300">
-                    <iconify-icon icon={feature.icon} width="20" height="20" class="group-hover/feat:scale-110 transition-transform duration-300"></iconify-icon>
-                  </div>
-                  <span class="text-sm font-medium text-white/90 group-hover/feat:text-white transition-colors duration-300 mb-1">{feature.name}</span>
-                  <p class="text-xs text-white/60 group-hover/feat:text-white/80 transition-colors duration-300 line-clamp-2">{feature.description}</p>
-                </button>
-              {/each}
+              <div class="flex items-center gap-3 mb-3 relative">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-[1px] bg-gradient-to-r from-primary/50 to-transparent"></div>
+                <div class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10 rounded-lg border border-primary/20 shadow-lg shadow-primary/5">
+                  <iconify-icon icon={
+                    project.title.toLowerCase().includes('accounting') ? 'material-symbols:account-balance-rounded' :
+                    project.title.toLowerCase().includes('production') ? 'material-symbols:factory-rounded' :
+                    project.title.toLowerCase().includes('e-commerce') ? 'material-symbols:shopping-cart-rounded' :
+                    project.title.toLowerCase().includes('pos') ? 'material-symbols:point-of-sale-rounded' :
+                    project.title.toLowerCase().includes('quickbooks') ? 'material-symbols:account-balance-rounded' :
+                    'material-symbols:featured-play-list-rounded'
+                  } class="text-primary" width="18"></iconify-icon>
+                </div>
+                <div class="flex flex-col">
+                  <h4 class="text-sm font-medium text-primary/80">CORE COMPONENTS</h4>
+                  <h3 class="text-lg font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/50 bg-clip-text text-transparent animate-gradient-x">
+                    {project.title.toLowerCase().includes('accounting') ? 'Accounting Modules' :
+                     project.title.toLowerCase().includes('production') ? 'Production Metrics' :
+                     project.title.toLowerCase().includes('e-commerce') ? 'Platform Features' :
+                     project.title.toLowerCase().includes('pos') ? 'POS Capabilities' :
+                     project.title.toLowerCase().includes('quickbooks') ? 'Integration Tools' :
+                     'System Features'}
+                  </h3>
+                </div>
+                <div class="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-[1px] bg-gradient-to-l from-primary/50 to-transparent"></div>
+              </div>
+              <div class="flex flex-wrap gap-2 overflow-x-auto pb-2 -mx-2 px-2 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                {#each project.features as feature, featureIndex}
+                  <button 
+                    class="group/feat flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-sm hover:bg-white/5 transition-all duration-300 border border-white/10 hover:border-primary/20 {selectedImageIndex === feature.imageIndex ? 'ring-2 ring-primary/30 bg-primary/5 border-primary/20' : 'hover:scale-[1.02]'} whitespace-nowrap"
+                    on:click={() => {
+                      selectedImageIndex = feature.imageIndex;
+                      currentFeatureIndex = featureIndex;
+                    }}
+                  >
+                    <div class="w-6 h-6 flex items-center justify-center text-white bg-white/10 rounded-full group-hover/feat:bg-primary/10 group-hover/feat:scale-110 transition-all duration-300">
+                      <iconify-icon icon={feature.icon} width="16" height="16" class="group-hover/feat:scale-110 transition-transform duration-300"></iconify-icon>
+                    </div>
+                    <span class="text-sm font-medium text-white/90 group-hover/feat:text-white transition-colors duration-300">{feature.name}</span>
+                  </button>
+                {/each}
+              </div>
+              <!-- Feature Description -->
+              {#if selectedImageIndex !== null}
+                <div class="mt-2 p-3 rounded-lg bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-sm border border-white/10 animate-fade-in">
+                  <p class="text-sm text-white/90 leading-relaxed">
+                    {project.features[currentFeatureIndex].description}
+                  </p>
+                </div>
+              {/if}
             </div>
           {/if}
         </div>
