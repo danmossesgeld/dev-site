@@ -118,6 +118,31 @@
             {/each}
           </div>
         </div>
+
+        {#if project.deployedOn && project.deployedOn.length > 0}
+          <div class="bg-gradient-to-br from-white/10 to-white/5 rounded-lg p-4 border border-white/10 shadow-lg">
+            <div class="flex items-center gap-2 mb-3">
+              <div class="w-6 h-6 flex items-center justify-center bg-primary/20 rounded-md">
+                <iconify-icon icon="material-symbols:deployed-code-rounded" class="text-primary" width="16"></iconify-icon>
+              </div>
+              <h4 class="text-sm font-medium text-primary">Currently Deployed</h4>
+            </div>
+            <div class="flex flex-col gap-2">
+              {#each project.deployedOn as deployment}
+                <div class="px-3 py-2 rounded-md bg-black/50 backdrop-blur-sm flex items-center gap-2 group/deploy hover:bg-primary/10 transition-all duration-300 border border-white/5 hover:border-primary/20">
+                  <div class="w-8 h-8 flex items-center justify-center bg-white/5 rounded-md group-hover/deploy:bg-primary/10 transition-all duration-300 overflow-hidden">
+                    {#if deployment.icon.startsWith('/')}
+                      <img src={deployment.icon} alt={deployment.name} class="w-6 h-6 object-contain" />
+                    {:else}
+                      <iconify-icon icon={deployment.icon} width="16" height="16" class="text-white/70 group-hover/deploy:text-primary transition-colors duration-300"></iconify-icon>
+                    {/if}
+                  </div>
+                  <span class="text-xs font-medium text-white/70 group-hover/deploy:text-white transition-colors duration-300">{deployment.name}</span>
+                </div>
+              {/each}
+            </div>
+          </div>
+        {/if}
       </div>
 
       <!-- Right Column - Screenshots and Features -->

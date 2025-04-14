@@ -44,22 +44,98 @@ export const projects: Project[] = [
 	{
 		title: "Computerized Accounting System",
 		description: "Enterprise-grade accounting solution with comprehensive financial management, reporting, and multi-user support. Features include automated journal entries, financial statements, and audit trails.",
-		tech: ["C#", ".NET", "MSSQL", "Crystal Reports"],
+		tech: ["VB.NET", "MSSQL", "Crystal Reports", "Visual Studio"],
 		status: "Live",
 		date: "2022 - 2023",
 		sourceUrl: "#",
 		liveUrl: "#",
-		features: []
+		deployedOn: [
+			{
+				name: "Eomong Trade Sales Inc",
+				icon: "/icons/eomong logo.png"
+			},
+			{
+				name: "Ace Promotion Marketing Strategies",
+				icon: "/icons/ace logo.png"
+			},
+			{
+				name: "Hideco Sugar Milling Company",
+				icon: "/icons/hideco logo.png"
+			}
+		],
+		features: [
+			{
+				name: "Main Dashboard",
+				description: "Comprehensive dashboard providing overview of financial status, key metrics, and quick access to all accounting modules",
+				icon: "material-symbols:dashboard-rounded",
+				imageIndex: 0
+			},
+			{
+				name: "Master Data Management",
+				description: "Centralized management of company accounts, products, assets, customers, and vendors with detailed tracking and categorization",
+				icon: "material-symbols:database-rounded",
+				imageIndex: 1
+			},
+			{
+				name: "Financial Reports",
+				description: "Multiple accounting and management reports including balance sheets, income statements, and custom financial analysis",
+				icon: "material-symbols:summarize-rounded",
+				imageIndex: 2
+			},
+			{
+				name: "Sales Management",
+				description: "Complete sales cycle management including customer invoicing, delivery receipts, sales orders, and billing statements",
+				icon: "material-symbols:receipt-long-rounded",
+				imageIndex: 3
+			},
+			{
+				name: "Purchase Management",
+				description: "Vendor management system with purchase orders, receiving reports, accounts payable, and debit memo processing",
+				icon: "material-symbols:inventory-2-rounded",
+				imageIndex: 4
+			},
+			{
+				name: "Report Generation",
+				description: "Integrated Crystal Reports for professional document generation and printing across all accounting forms",
+				icon: "material-symbols:print-rounded",
+				imageIndex: 5
+			}
+		]
 	},
 	{
 		title: "Production Monitoring System",
-		description: "Real-time production tracking system with live analytics, KPI dashboards, and automated reporting. Enables efficient monitoring of manufacturing processes and productivity metrics.",
-		tech: ["C#", ".NET", "MSSQL", "JavaScript"],
+		description: "Real-time manufacturing monitoring system that tracks production lines and loss times across the entire department. Features live data collection, real-time graph visualizations, and comprehensive error tracking to optimize manufacturing efficiency and minimize downtime.",
+		tech: ["VB.NET", "MSSQL", "Crystal Reports", "Visual Studio"],
 		status: "Live",
 		date: "2021 - 2022",
 		sourceUrl: "#",
 		liveUrl: "#",
-		features: []
+		features: [
+			{
+				name: "Department Production Dashboard",
+				description: "Real-time monitoring of all production lines with live data visualization and performance metrics across the entire manufacturing department",
+				icon: "material-symbols:monitoring-rounded",
+				imageIndex: 0
+			},
+			{
+				name: "Line Production Tracking",
+				description: "Individual production line monitoring with real-time output tracking, efficiency metrics, and live status updates",
+				icon: "material-symbols:analytics-rounded",
+				imageIndex: 1
+			},
+			{
+				name: "Department Loss Time Analysis",
+				description: "Comprehensive error tracking system showing loss times and manufacturing issues across all production lines in real-time",
+				icon: "material-symbols:error-circle-rounded",
+				imageIndex: 2
+			},
+			{
+				name: "Line Error Monitoring",
+				description: "Detailed error tracking for individual production lines with real-time alerts and loss time analysis for immediate response",
+				icon: "material-symbols:warning-outline-rounded",
+				imageIndex: 3
+			}
+		]
 	},
 	{
 		title: "E-Commerce Platform",
@@ -231,14 +307,18 @@ export const techStack: TechStackCategory[] = [
 
 export const screenshots: Screenshots = {
 	"Computerized Accounting System": [
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=CAS+Dashboard", caption: "Main Dashboard" },
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=CAS+Journal+Entry", caption: "Journal Entry" },
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=CAS+Reports", caption: "Financial Reports" }
+		{ url: "/projectimages/cas/cas-dashboard.png", caption: "Main Dashboard" },
+		{ url: "/projectimages/cas/master list of company accounts, products, assets, customer and vendor.png", caption: "Master Data Management" },
+		{ url: "/projectimages/cas/multiple accounting and management reports.png", caption: "Financial Reports" },
+		{ url: "/projectimages/cas/customer invoicing, delivery receipt, sales order, billing statement, etc.png", caption: "Sales Management" },
+		{ url: "/projectimages/cas/vendor PO, receiving reports, accounts payables, debit memo, etc..png", caption: "Purchase Management" },
+		{ url: "/projectimages/cas/crystal report printing integration for each form.png", caption: "Report Generation" }
 	],
 	"Production Monitoring System": [
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=PMS+Dashboard", caption: "Production Dashboard" },
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=PMS+Analytics", caption: "Analytics View" },
-		{ url: "https://placehold.co/1920x1080/2563eb/ffffff?text=PMS+Reports", caption: "Reports" }
+		{ url: "/projectimages/pms/line production monitoring serve (WHOLE DEPARTMENT).png", caption: "Department-wide Production Monitoring" },
+		{ url: "/projectimages/pms/line production monitoring.png", caption: "Individual Line Production Tracking" },
+		{ url: "/projectimages/pms/production error monitoring SERVER (whole department).png", caption: "Department Error Monitoring System" },
+		{ url: "/projectimages/pms/production error monitoring.png", caption: "Line-specific Error Analysis" }
 	],
 	"E-Commerce Platform": [
 		{ url: "/projectimages/ecommerce/reactive-homepage.png", caption: "Reactive Homepage" },
