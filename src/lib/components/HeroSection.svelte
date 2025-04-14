@@ -1,6 +1,7 @@
 <script lang="ts">
   import { contactInfo } from '$lib/data';
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
 
   let isVisible = false;
   onMount(() => {
@@ -19,7 +20,7 @@
           <div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary/50 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000"></div>
           <div class="relative w-36 h-36 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-primary/50 transition duration-500">
             <img 
-              src="/icons/profilepic.png" 
+              src="{base}/icons/profilepic.png" 
               alt="Dan Mossesgeld"
               class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
             />

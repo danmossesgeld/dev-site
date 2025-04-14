@@ -2,6 +2,7 @@
   import { fly } from 'svelte/transition';
   import { experiences } from '$lib/data';
   import { onMount } from 'svelte';
+  import { base } from '$app/paths';
 </script>
 
 <section id="experience" class="py-16 relative">
@@ -161,8 +162,9 @@
       <!-- Download Resume Button -->
       <div class="mt-12 text-center">
         <a 
-          href="/RESUME - Dan Mossesgeld.pdf" 
+          href="{base}/RESUME - Dan Mossesgeld.pdf" 
           target="_blank" 
+          rel="noopener noreferrer"
           class="group relative inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-xl bg-black/40 hover:bg-primary/20 text-white/90 hover:text-white transition-all duration-500 backdrop-blur-sm border border-white/10 hover:border-primary/30"
         >
           <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>

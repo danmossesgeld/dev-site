@@ -2,6 +2,8 @@
 	import { contactInfo } from '$lib/data';
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { base } from '$app/paths';
 
 	export let activeSection = 'about';
 	let isMobileMenuOpen = false;
@@ -104,8 +106,9 @@
 				</a>
 				<div class="w-px h-6 bg-base-content/10 mx-1"></div>
 				<a 
-					href="/RESUME - Dan Mossesgeld.pdf" 
+					href="{base}/RESUME - Dan Mossesgeld.pdf" 
 					target="_blank"
+					rel="noopener noreferrer"
 					class="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 border border-primary/20 hover:border-primary/30"
 				>
 					<iconify-icon 
@@ -195,8 +198,9 @@
 						
 						<!-- Mobile Resume Download -->
 						<a 
-							href="/RESUME - Dan Mossesgeld.pdf" 
+							href="{base}/RESUME - Dan Mossesgeld.pdf" 
 							target="_blank"
+							rel="noopener noreferrer"
 							class="mt-2 group flex items-center justify-center gap-2 p-4 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300"
 						>
 							<iconify-icon 
