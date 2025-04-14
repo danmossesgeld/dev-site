@@ -14,10 +14,15 @@ const config = {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build',
-			fallback: 'index.html'
+			fallback: 'index.html',
+			precompress: false,
+			strict: false
 		}),
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '/dev-site' : ''
+		},
+		prerender: {
+			handleHttpError: 'warn'
 		}
 	}
 };
