@@ -5,5 +5,6 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	css: {
 		postcss: './postcss.config.js'
-	}
+	},
+	base: process.env.NODE_ENV === 'production' ? '/dev-site/' : '/'
 });
