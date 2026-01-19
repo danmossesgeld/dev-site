@@ -4,45 +4,43 @@ export const contactInfo = {
 	email: 'danmossesgeld@gmail.com'
 };
 
-export const professionalSummary = `Full Stack Developer with expertise in modern web technologies and enterprise solutions. 
-Proven track record in developing scalable applications, leading technical teams, and implementing 
-efficient development workflows.`;
+export const professionalSummary = `I am a software developer focused on building .NET desktop applications and web systems for business operations. My experience ranges from developing custom accounting, reporting, and production monitoring software while also providing technical support on the hardware they run on. I am used to working directly with users to ensure that the software I build is useful and reliable.`;
 
 export const experiences: Experience[] = [
 	{
-		title: 'Full Stack Web Developer',
-		period: '2025 - Present',
-		company: 'Mage Technologies, Inc.',
-		description: 'Collaborated with a team of developers using GitHub as the primary platform to design, build, and deploy web-based ERP and POS systems. Implemented modern web technologies and cloud solutions for enterprise applications.',
-		technologies: ['SvelteKit', 'TypeScript', 'Firebase', 'GitHub', 'TailwindCSS', 'DaisyUI']
+		title: 'Web Developer',
+		period: '01/2025 - Present',
+		company: 'Mage Technologies, Inc',
+		description: 'Collaborated with a team on GitHub to build and deploy web-based ERP and POS systems using SvelteKit, TypeScript, and Firebase.',
+		technologies: ['SvelteKit', 'TypeScript', 'Firebase', 'GitHub']
 	},
 	{
-		title: 'Full Stack .NET Developer',
-		period: '2023 - 2025',
-		company: 'Digisoft Business Solutions Inc.',
-		description: 'Designed and developed custom .NET-based accounting systems with advanced financial reporting and transaction management. Implemented QuickBooks integration and SAP Crystal Reports. Provided technical support and consultation to clients.',
-		technologies: ['C#', '.NET', 'MSSQL', 'QuickBooks SDK', 'SAP Crystal Reports']
+		title: 'Systems Developer',
+		period: '07/2023 - Present',
+		company: 'Digisoft Business Solutions Inc',
+		description: 'Built custom .NET systems to manage business finances, including tools for tracking transactions, balancing accounts, and generating financial reports. Developed software to pull and organize data from QuickBooks, using MSSQL and Crystal Reports to create automated documentation and custom reports. Met with clients to understand their business needs, proposed technical solutions, and updated software features based on their feedback.',
+		technologies: ['C#', '.NET', 'MSSQL', 'QuickBooks', 'Crystal Reports']
 	},
 	{
-		title: 'Full Stack .NET Developer',
-		period: '2022 - 2023',
+		title: 'Lead Operations Developer',
+		period: '06/2022 - 06/2023',
 		company: 'MinebeaMitsumi Inc.',
-		description: 'Developed production monitoring software for real-time data visualization and analysis. Led training sessions and provided technical support for international teams. Implemented solutions to improve production efficiency and problem resolution.',
-		technologies: ['C#', '.NET', 'MSSQL', 'JavaScript', 'Data Visualization']
+		description: 'Built software to track machine output and staff productivity for real-time production floor monitoring. Created dashboards that turned raw production data into clear charts, helping management spot trends and fix bottlenecks faster. Worked directly with another headquarters to ensure software standards were met across all sites. Ran training sessions for operators and updated the system based on direct feedback to ensure easy adoption.',
+		technologies: ['C#', '.NET', 'MSSQL', 'Data Visualization']
 	},
 	{
-		title: 'Freelance IT Technician',
-		period: '2015 - Present',
+		title: 'IT Specialist',
+		period: '05/2016 - Present',
 		company: 'Freelance',
-		description: 'Provided hardware and software maintenance, custom PC building, and system configuration services. Diagnosed and resolved technical issues, optimized system performance, and delivered tailored solutions for diverse client needs.',
-		technologies: ['Hardware Maintenance', 'System Configuration', 'Software Installation', 'PC Building', 'Troubleshooting']
+		description: 'Provided comprehensive IT support including troubleshooting hardware and software issues. Built custom desktops from scratch, selecting specific parts to match performance needs and user requirements. Installed and configured hardware, software, and drivers. Upgraded components and updated software to improve speed and maintain compatibility with new technology.',
+		technologies: ['Hardware Support', 'PC Building', 'System Configuration', 'Software Troubleshooting', 'System Maintenance']
 	},
 	{
-		title: 'Student I.T. Support',
-		period: '2018 - 2021',
-		company: 'Polytechnic University of the Philippines - Bataan',
-		description: 'Provided technical support for hardware and network issues. Performed system maintenance, malware removal, and OS updates. Assisted students and staff with technical problems and system optimizations.',
-		technologies: ['Technical Support', 'System Maintenance', 'Network Troubleshooting', 'OS Management', 'Hardware Repair']
+		title: 'Student IT Assistant',
+		period: '06/2018 - 01/2021',
+		company: 'Polytechnic University of the Philippines',
+		description: 'Provided hands-on technical support for hardware and network problems, ensuring quick solutions for students and staff. Managed user accounts by handling password resets and restoring access to locked accounts. Cleaned malware infections, fixed system errors, and performed OS updates to keep computers fast and secure.',
+		technologies: ['Technical Support', 'System Maintenance', 'Network Troubleshooting', 'Account Management', 'Security']
 	}
 ];
 

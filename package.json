@@ -3,6 +3,7 @@
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
+	"packageManager": "yarn@1.22.22",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -14,7 +15,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^1.0.0-next.50",
 		"@sveltejs/kit": "^1.20.4",
 		"@sveltejs/vite-plugin-svelte": "^2.4.2",
@@ -36,6 +37,5 @@
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.2",
 		"vite": "^4.4.11"
-	},
-	"packageManager": "yarn@4.1.0"
+	}
 }

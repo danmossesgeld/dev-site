@@ -11,7 +11,7 @@
   export let onOpenModal: (project: Project) => void;
 
   let isHoveringFeatures = false;
-  let intervalId: number;
+  let intervalId: ReturnType<typeof setInterval> | undefined;
   let fadeOut = false;
 
   // Function to cycle through features
@@ -177,6 +177,7 @@
           {#if project.features.length > 0}
             <div 
               class="flex flex-col gap-2"
+              role="region"
               on:mouseenter={handleMouseEnter}
               on:mouseleave={handleMouseLeave}
             >

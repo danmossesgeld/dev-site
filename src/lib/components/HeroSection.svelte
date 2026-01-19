@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { contactInfo } from '$lib/data';
+  import { contactInfo, professionalSummary } from '$lib/data';
   import { onMount } from 'svelte';
   import { base } from '$app/paths';
 
@@ -105,9 +105,7 @@
 
         <!-- Bio Text -->
         <p class="max-w-2xl text-base text-white/70 leading-relaxed" class:opacity-0={!isVisible} class:animate-slide-up={isVisible} style="animation-delay: 0.6s">
-          Full Stack Developer with expertise in modern web technologies and enterprise solutions. 
-          Proven track record in developing scalable applications, leading technical teams, 
-          and implementing efficient development workflows.
+          {professionalSummary}
         </p>
 
         <!-- CTA Button -->
